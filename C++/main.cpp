@@ -157,13 +157,21 @@ bool ehValida(string equacao){
 
 int computadorResponde(){
 	cout << "Modo do computador escolhido!\n";
+	string equacao;
+  cout << "Digite a Equação\n";
+  cin >> equacao;
+  getline(cin,equacao);
+  while(!ehValida(equacao)){   
+    cout << "\nEquacao invalida\n\n";
+    cout << "Digite Novamente\n";
+    cin >> equacao;
+    getline(cin,equacao);
+  }
 }
-
 
 int usuarioResponde(){
 	cout << "Modo do usuário escolhido!\n";
 }
-
 
 
 int main(){
