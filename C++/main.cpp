@@ -5,6 +5,7 @@
 #include <errno.h>
 #include <locale.h>
 #include <string>
+#include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -320,8 +321,10 @@ std::vector<std::string> split(std::string strToSplit, char delimeter){
 
 int usuarioResponde()
 {
-	cout << "Modo do usuário escolhido!"<<std::endl<<std::endl;
-
+	cout <<std::endl << "Modo do usuário escolhido!"<<std::endl;
+	cout << "As respostas são sempre um número (2, 5, -9, 2/3) ou V"<<std::endl;
+	cout << "V - Representa que o conjunto solução é vazio para o domínio dos Reais."<<std::endl<<std::endl;
+	cout << "Caso deseje sair, digite <s>"<<std::endl<<std::endl;
 	FILE *arq;
 	char matriz[linhas][caracteres];
 	char *result;
@@ -329,6 +332,8 @@ int usuarioResponde()
 	int random;
 	char returned[linhas];
 	bool disponivel = false;
+	bool guard = true;
+	char answer[8];
 	
 
 	arq = fopen("data/equations-bd.txt", "rt");
@@ -360,12 +365,21 @@ int usuarioResponde()
 		returned[random] = 'x';
 		disponivel = false;
 
-		std::vector<std::string> splittedStrings = split(matriz[random], '$');
-		std::cout<<splittedStrings[0]<<std::endl;
-		std::cout<<splittedStrings[2]<<std::endl;
+		std::vector<std::string> splittedQuest = split(matriz[random], '$');
+		std::cout<<splittedQuest[0]<<std::endl;
+		std::cout<<splittedQuest[2]<<std::endl;
 
+		cin >> answer;
+		
+		if(!strcmp(answer, "s")){
+			guard = false;
+		} else if(answer == splittedQuest[1]){
+			cout << "Acertou!"<<std::endl<<std::endl;
+		}else{
+			cout << "Errou!"<<std::endl<<std::endl;
+		}
 
-	} while (false);
+	} while (guard);
 }
 
 int main()
