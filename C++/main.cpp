@@ -3,6 +3,7 @@
 #include <errno.h>
 #include <locale.h>
 #include <string>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -170,28 +171,39 @@ int main(){
 	
 	setlocale(LC_ALL,"Portuguese");
 	
-    cout << "Bem vindo ao Equations Solver!\n";
+   //COLOCAR A LOGO AQUI
     char opcao;
     bool opInvalida = true;
     
     do{
-	    cout << "Escolha um dos modos abaixo:\n";
-	    cout << "\nDigitar equações (D)\nDescobrir o resultado (R)\n";
+      cout << "\n===============================================\n";
+      cout << "          Bem vindo ao Equations Solver!\n";
+      cout << "===============================================\n";
+      cout << "==================== MENU ====================="; 
+	    cout << "\n\nEscolha uma das opções abaixo:\n";
+	    cout << "\nModo Digitar equações (D)";
+      cout << "\nModo Descobrir resultados (R)";
+      cout << "\nEncerrar programa (S)\n";
+
 		cin >> opcao;
 		opcao = tolower(opcao);
-		opInvalida = (opcao != 'r' && opcao != 'd');
+		opInvalida = (opcao != 'r' && opcao != 'd' && opcao != 's');
 
 		if(opInvalida){
-			cout << "Opção inválida.\n";
+			cout << "\nOpção inválida. Por favor tente novamente.\n\n";
+      system("pause");
+      system("cls");
 		}
 
 	}while(opInvalida);
 	
 	if(opcao == 'd'){
 		computadorResponde();
-	}else{
+	}else if(opcao == 'r'){
 		usuarioResponde();
-	}
+	}else{
+    exit(0);
+  }
 	
     return 0;       
 }
