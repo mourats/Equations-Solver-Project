@@ -304,10 +304,7 @@ std::vector<std::string> split(std::string strToSplit, char delimeter) {
 }
 
 int usuarioResponde() {
-	cout <<std::endl << "Modo do usuário escolhido!"<<std::endl;
-	cout << "As respostas são sempre um número (2, 5, -9, 2/3) ou V"<<std::endl;
-	cout << "V - Representa que o conjunto solução é vazio para o domínio dos Reais."<<std::endl<<std::endl;
-	cout << "Caso deseje sair, digite <s>"<<std::endl<<std::endl;
+
 	FILE *arq;
 	char matriz[linhas][caracteres];
 	char *result;
@@ -317,9 +314,43 @@ int usuarioResponde() {
 	bool disponivel = false;
 	bool guard = true;
 	char answer[8];
-	
+	bool opInvalida = false;
+	char opcao;
 
-	arq = fopen("data/equations-bd.txt", "rt");
+	do {
+	cout <<std::endl << "----Modo do usuário escolhido!----\n"<<std::endl;
+	cout << "Escolha um tipo de equação:\n\n";
+	cout << "Primeiro Grau (P)\n";
+	cout << "Segundo Grau (S)\n\n";
+
+	cout << "Caso deseje sair, digite <e>"<<std::endl<<std::endl;
+
+	cin >> opcao;
+	opcao = tolower(opcao);
+	opInvalida = (opcao != 'p' && opcao != 's' && opcao != 'e');
+
+		if (opInvalida) {
+			cout << "\nOpção inválida. Por favor tente novamente.\n\n";
+			system("pause");
+			system("cls");
+		}
+
+	} while (opInvalida);
+
+
+	if (opcao == 'p') {
+		cout << "---- Modo equações do Primeiro Grau escolhido! ---- \n\n";
+		cout << "As respostas são sempre um número (2, 5, -9, 2/3)"<<std::endl;
+		arq = fopen("data/first-degree-equations-bd.txt", "rt");
+	} else if (opcao == 's') {
+		cout << "---- Modo equações do Segundo Grau escolhido! ---- \n\n";
+		cout << "As respostas são sempre um número (2, 5, -9, 2/3) ou V"<<std::endl;
+		cout << "V - Representa que o conjunto solução é vazio para o domínio dos Reais."<<std::endl<<std::endl;
+		arq = fopen("data/second-degree-equations-bd.txt", "rt");
+	} else {
+		exit(0);
+	}
+
 
 	if (arq == NULL) {
 		cout << "Problemas na abertura do arquivo\n";
@@ -352,12 +383,12 @@ int usuarioResponde() {
 
 		cin >> answer;
 		
-		if(!strcmp(answer, "s")){
+		if(!strcmp(answer, "e")){
 			guard = false;
 		} else if(answer == splittedQuest[1]){
-			cout << "Acertou!"<<std::endl<<std::endl;
+			cout << "ACERTOU! :)"<<std::endl<<std::endl;
 		}else{
-			cout << "Errou!"<<std::endl<<std::endl;
+			cout << "ERROU! :("<<std::endl<<std::endl;
 		}
 
 	} while (guard);
@@ -394,11 +425,11 @@ int main() {
 		cout << "\n\nEscolha uma das opções abaixo:\n";
 		cout << "\nModo Digitar equações (D)";
 		cout << "\nModo Descobrir resultados (R)";
-		cout << "\nEncerrar programa (S)\n";
+		cout << "\nEncerrar programa (E)\n";
 
 		cin >> opcao;
 		opcao = tolower(opcao);
-		opInvalida = (opcao != 'r' && opcao != 'd' && opcao != 's');
+		opInvalida = (opcao != 'r' && opcao != 'd' && opcao != 'e');
 
 		if (opInvalida) {
 			cout << "\nOpção inválida. Por favor tente novamente.\n\n";
