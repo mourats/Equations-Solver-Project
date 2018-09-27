@@ -408,19 +408,14 @@ int main() {
 
 	} while (opInvalida);
 
-
-	if (opcao == 'd')
-	{
+	if (opcao == 'd') {
 		computadorResponde();
 	}
-	else if (opcao == 'r')
-	{
+	else if (opcao == 'r') {
 		usuarioResponde();
 	}
-	else
-	{
+	else {
 		exit(0);
 	}
-
 	return 0;
 }
