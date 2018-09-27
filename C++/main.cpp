@@ -173,7 +173,7 @@ std::vector<std::string> split(std::string strToSplit, char delimeter) {
     char str[100];
     FILE *logo;
     
-    logo = fopen("irineu/data/logomarca.txt","rt");
+    logo = fopen("data/logomarca.txt","rt");
 	if(logo == NULL){
 		cout << "Arquivo <logomarca.txt> não encontrado.\n";
 	}else{
