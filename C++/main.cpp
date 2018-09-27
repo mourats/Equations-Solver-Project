@@ -10,191 +10,12 @@
 #include <stdio.h>
 #include <cmath>
 
+#include "validate.h"
+
 #define linhas 40
 #define caracteres 200
 
 using namespace std;
-
-bool ehValida(string equacao) {
-	string state = "INICIAL";
-	int parenteses = 0;
-	int igual = 1;
-	for (int i = 0; i < equacao.length(); ++i) 	{
-		if (state == "INICIAL") {
-			if (equacao[i] == 'x') {
-				state = "X";
-			}
-			else if (isdigit(equacao[i])) {
-				state = "DIGITO";
-			}
-			else if (equacao[i] == '(') {
-				parenteses++;
-				state = "PARENTESES";
-			}
-			else if (equacao[i] == '+' || equacao[i] == '-') {
-				state = "SINAL";
-			}
-			else if (equacao[i] == ' ') {
-			}
-			else {
-				return false;
-			}
-		}
-		else if (state == "X") {
-			if (equacao[i] == '^') {
-				state = "^";
-			}
-			else if (equacao[i] == ' ') {
-				state = "ESPACO";
-			}
-			else if (equacao[i] == '(') {
-				parenteses++;
-				state = "PARENTESES";
-			}
-			else if (equacao[i] == ')') {
-				if (parenteses == 0) {
-					return false;
-				}
-				parenteses--;
-				state = "PARENTESES_FEC";
-			}
-			else {
-				return false;
-			}
-		}
-		else if (state == "DIGITO") {
-			if (equacao[i] == ' ') {
-				state = "ESPACO";
-			}
-			else if (equacao[i] == 'x') {
-				state = "X";
-			}
-			else if (equacao[i] == '(') {
-				parenteses++;
-				state = "PARENTESES";
-			}
-			else if (isdigit(equacao[i])) {
-			}
-			else if (equacao[i] == ')') {
-				if (parenteses == 0) {
-					return false;
-				}
-				parenteses--;
-				state = "PARENTESES_FEC";
-			}
-			else {
-				return false;
-			}
-		}
-		else if (state == "^") {
-			if (isdigit(equacao[i])) {
-				state = "EXPOENTE";
-			}
-			else {
-				return false;
-			}
-		}
-		else if (state == "EXPOENTE") {
-			if (isdigit(equacao[i])) {
-			}
-			else if (equacao[i] == ' ') {
-				state = "ESPACO";
-			}
-			else {
-				return false;
-			}
-		}
-		else if (state == "ESPACO") {
-			if (equacao[i] == '+' || equacao[i] == '-' || equacao[i] == '*' || equacao[i] == '/') {
-				state = "SINAL";
-			}
-			else if (equacao[i] == '=') {
-				if (igual == 0) {
-					return false;
-				}
-				igual--;
-				state = "SINAL";
-			}
-			else if (equacao[i] == ' ') {
-			}
-			else {
-				return false;
-			}
-		}
-		else if (state == "SINAL") {
-			if (equacao[i] == ' ') {
-				state = "ESPACO_SINAL";
-			}
-			else {
-				return false;
-			}
-		}
-		else if (state == "ESPACO_SINAL") {
-			if (equacao[i] == 'x') {
-				state = "X";
-			}
-			else if (isdigit(equacao[i])) {
-				state = "DIGITO";
-			}
-			else if (equacao[i] == '(') {
-				parenteses++;
-				state = "PARENTESES";
-			}
-			else {
-				return false;
-			}
-		}
-		else if (state == "PARENTESES") {
-			if (equacao[i] == ')') {
-				if (parenteses == 0) {
-					return false;
-				}
-				parenteses--;
-				state = "PARENTESES_FEC";
-			}
-			else if (equacao[i] == 'x') {
-				state = "X";
-			}
-			else if (isdigit(equacao[i])) {
-				state = "DIGITO";
-			}
-			else if (equacao[i] == '(') {
-				parenteses++;
-			}
-			else {
-				return false;
-			}
-		}
-		else if (state == "PARENTESES_FEC") {
-			if (equacao[i] == ')') {
-				if (parenteses == 0) {
-					return false;
-				}
-				parenteses--;
-			}
-			else if (equacao[i] == '(') {
-				parenteses++;
-				state = "PARENTESES";
-			}
-			else if (equacao[i] == ' ') {
-				state = "ESPACO";
-			}
-			else if (equacao[i] == '^') {
-				state = "EXPOENTE";
-			}
-			else {
-				return false;
-			}
-		}
-	}
-
-	if (igual == 0 && parenteses == 0 && (state == "DIGITO" || state == "X" || state == "PARENTESES_FEC" || state == "EXPOENTE")) {
-		return true;
-	}
-	else {
-		return false;
-	}
-}
 
 void instrucoes() {
 	cout << "====================================== INSTRUÇÕES =========================================";
@@ -281,16 +102,6 @@ int computadorResponde() {
 	// calculaRaizes(arr[0], arr[1], arr[2]);
 }
 
-/*
-	for (int i = 0; i < equacao.length(); i++) {
-		if (equacao[i] == "=") {
-			if (i != (equacao.length - 1)) {
-				
-			}
-		} 
-	}
-	*/
-
 
 //split();
 std::vector<std::string> split(std::string strToSplit, char delimeter) {
@@ -340,7 +151,7 @@ int usuarioResponde() {
 
 	if (opcao == 'p') {
 		cout << "---- Modo equações do Primeiro Grau escolhido! ---- \n\n";
-		cout << "As respostas são sempre um número (2, 5, -9, 2/3)"<<std::endl;
+		cout << "As respostas são sempre um número (2, 5, -9, 2/3)"<<std::endl<<std::endl;
 		arq = fopen("data/first-degree-equations-bd.txt", "rt");
 	} else if (opcao == 's') {
 		cout << "---- Modo equações do Segundo Grau escolhido! ---- \n\n";
@@ -398,11 +209,11 @@ int main() {
 
 	setlocale(LC_ALL, "Portuguese");
 
-	int tamanho = 10;
+	int tamanho = 100;
     char str[100];
     FILE *logo;
     
-    logo = fopen("C:/Users/USUARIO/Documents/Gabriel/UFCG/plp/Equations Solver/Equations-Solver-Project/C++/logomarca.txt","r"); // TA BUGADO, SE NÃO COLOCAR O CAMINHO TODO NÃO PEGA, POREM DEVERIA PORQUE O ARQUIVO ESTÁ NA MESMA PASTA QUE O MAIN
+    logo = fopen("irineu/data/logomarca.txt","rt");
 	if(logo == NULL){
 		cout << "Arquivo <logomarca.txt> não encontrado.\n";
 	}else{
@@ -433,8 +244,8 @@ int main() {
 
 		if (opInvalida) {
 			cout << "\nOpção inválida. Por favor tente novamente.\n\n";
-			system("pause");
-			system("cls");
+			getchar();
+			system("clear");
 		}
 
 	} while (opInvalida);
