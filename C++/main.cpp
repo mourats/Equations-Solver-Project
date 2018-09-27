@@ -15,249 +15,188 @@
 
 using namespace std;
 
-bool ehValida(string equacao)
-{
+bool ehValida(string equacao) {
 	string state = "INICIAL";
 	int parenteses = 0;
 	int igual = 1;
-	for (int i = 0; i < equacao.length(); ++i)
-	{
-		if (state == "INICIAL")
-		{
-			if (equacao[i] == 'x')
-			{
+	for (int i = 0; i < equacao.length(); ++i) 	{
+		if (state == "INICIAL") {
+			if (equacao[i] == 'x') {
 				state = "X";
 			}
-			else if (isdigit(equacao[i]))
-			{
+			else if (isdigit(equacao[i])) {
 				state = "DIGITO";
 			}
-			else if (equacao[i] == '(')
-			{
+			else if (equacao[i] == '(') {
 				parenteses++;
 				state = "PARENTESES";
 			}
-			else if (equacao[i] == '+' || equacao[i] == '-')
-			{
+			else if (equacao[i] == '+' || equacao[i] == '-') {
 				state = "SINAL";
 			}
-			else if (equacao[i] == ' ')
-			{
+			else if (equacao[i] == ' ') {
 			}
-			else
-			{
+			else {
 				return false;
 			}
 		}
-		else if (state == "X")
-		{
-			if (equacao[i] == '^')
-			{
+		else if (state == "X") {
+			if (equacao[i] == '^') {
 				state = "^";
 			}
-			else if (equacao[i] == ' ')
-			{
+			else if (equacao[i] == ' ') {
 				state = "ESPACO";
 			}
-			else if (equacao[i] == '(')
-			{
+			else if (equacao[i] == '(') {
 				parenteses++;
 				state = "PARENTESES";
 			}
-			else if (equacao[i] == ')')
-			{
-				if (parenteses == 0)
-				{
+			else if (equacao[i] == ')') {
+				if (parenteses == 0) {
 					return false;
 				}
 				parenteses--;
 				state = "PARENTESES_FEC";
 			}
-			else
-			{
+			else {
 				return false;
 			}
 		}
-		else if (state == "DIGITO")
-		{
-			if (equacao[i] == ' ')
-			{
+		else if (state == "DIGITO") {
+			if (equacao[i] == ' ') {
 				state = "ESPACO";
 			}
-			else if (equacao[i] == 'x')
-			{
+			else if (equacao[i] == 'x') {
 				state = "X";
 			}
-			else if (equacao[i] == '(')
-			{
+			else if (equacao[i] == '(') {
 				parenteses++;
 				state = "PARENTESES";
 			}
-			else if (isdigit(equacao[i]))
-			{
+			else if (isdigit(equacao[i])) {
 			}
-			else if (equacao[i] == ')')
-			{
-				if (parenteses == 0)
-				{
+			else if (equacao[i] == ')') {
+				if (parenteses == 0) {
 					return false;
 				}
 				parenteses--;
 				state = "PARENTESES_FEC";
 			}
-			else
-			{
+			else {
 				return false;
 			}
 		}
-		else if (state == "^")
-		{
-			if (isdigit(equacao[i]))
-			{
+		else if (state == "^") {
+			if (isdigit(equacao[i])) {
 				state = "EXPOENTE";
 			}
-			else
-			{
+			else {
 				return false;
 			}
 		}
-		else if (state == "EXPOENTE")
-		{
-			if (isdigit(equacao[i]))
-			{
+		else if (state == "EXPOENTE") {
+			if (isdigit(equacao[i])) {
 			}
-			else if (equacao[i] == ' ')
-			{
+			else if (equacao[i] == ' ') {
 				state = "ESPACO";
 			}
-			else
-			{
+			else {
 				return false;
 			}
 		}
-		else if (state == "ESPACO")
-		{
-			if (equacao[i] == '+' || equacao[i] == '-' || equacao[i] == '*' || equacao[i] == '/')
-			{
+		else if (state == "ESPACO") {
+			if (equacao[i] == '+' || equacao[i] == '-' || equacao[i] == '*' || equacao[i] == '/') {
 				state = "SINAL";
 			}
-			else if (equacao[i] == '=')
-			{
-				if (igual == 0)
-				{
+			else if (equacao[i] == '=') {
+				if (igual == 0) {
 					return false;
 				}
 				igual--;
 				state = "SINAL";
 			}
-			else if (equacao[i] == ' ')
-			{
+			else if (equacao[i] == ' ') {
 			}
-			else
-			{
+			else {
 				return false;
 			}
 		}
-		else if (state == "SINAL")
-		{
-			if (equacao[i] == ' ')
-			{
+		else if (state == "SINAL") {
+			if (equacao[i] == ' ') {
 				state = "ESPACO_SINAL";
 			}
-			else
-			{
+			else {
 				return false;
 			}
 		}
-		else if (state == "ESPACO_SINAL")
-		{
-			if (equacao[i] == 'x')
-			{
+		else if (state == "ESPACO_SINAL") {
+			if (equacao[i] == 'x') {
 				state = "X";
 			}
-			else if (isdigit(equacao[i]))
-			{
+			else if (isdigit(equacao[i])) {
 				state = "DIGITO";
 			}
-			else if (equacao[i] == '(')
-			{
+			else if (equacao[i] == '(') {
 				parenteses++;
 				state = "PARENTESES";
 			}
-			else
-			{
+			else {
 				return false;
 			}
 		}
-		else if (state == "PARENTESES")
-		{
-			if (equacao[i] == ')')
-			{
-				if (parenteses == 0)
-				{
+		else if (state == "PARENTESES") {
+			if (equacao[i] == ')') {
+				if (parenteses == 0) {
 					return false;
 				}
 				parenteses--;
 				state = "PARENTESES_FEC";
 			}
-			else if (equacao[i] == 'x')
-			{
+			else if (equacao[i] == 'x') {
 				state = "X";
 			}
-			else if (isdigit(equacao[i]))
-			{
+			else if (isdigit(equacao[i])) {
 				state = "DIGITO";
 			}
-			else if (equacao[i] == '(')
-			{
+			else if (equacao[i] == '(') {
 				parenteses++;
 			}
-			else
-			{
+			else {
 				return false;
 			}
 		}
-		else if (state == "PARENTESES_FEC")
-		{
-			if (equacao[i] == ')')
-			{
-				if (parenteses == 0)
-				{
+		else if (state == "PARENTESES_FEC") {
+			if (equacao[i] == ')') {
+				if (parenteses == 0) {
 					return false;
 				}
 				parenteses--;
 			}
-			else if (equacao[i] == '(')
-			{
+			else if (equacao[i] == '(') {
 				parenteses++;
 				state = "PARENTESES";
 			}
-			else if (equacao[i] == ' ')
-			{
+			else if (equacao[i] == ' ') {
 				state = "ESPACO";
 			}
-			else if (equacao[i] == '^')
-			{
+			else if (equacao[i] == '^') {
 				state = "EXPOENTE";
 			}
-			else
-			{
+			else {
 				return false;
 			}
 		}
 	}
-	if (igual == 0 && parenteses == 0 && (state == "DIGITO" || state == "X" || state == "PARENTESES_FEC" || state == "EXPOENTE"))
-	{
+
+	if (igual == 0 && parenteses == 0 && (state == "DIGITO" || state == "X" || state == "PARENTESES_FEC" || state == "EXPOENTE")) {
 		return true;
 	}
-	else
-	{
+	else {
 		return false;
 	}
 }
 
-void instrucoes()
-{
+void instrucoes() {
 	cout << "====================================== INSTRUÇÕES =========================================";
 	cout << "\n1) A variável usada deve ser sempre x;\n";
 	cout << "2) É necessário que os termos sejam separados por espaço e os\n";
@@ -313,14 +252,15 @@ void calculaRaizes(float a, float b, float c){
   }
 }
 
-int computadorResponde(){
+int computadorResponde() {
 
 	cout << "Modo do computador escolhido!\n";
 	cout << "\nDeseja consultar as instruções? Se sim digite S, se não, digite outra tecla.\n";
 	char inst;
 	cin >> inst;
 	inst = tolower(inst);
-	if (inst == 's'){
+
+	if (inst == 's') {
 		instrucoes();
 	}
 
@@ -328,7 +268,8 @@ int computadorResponde(){
 	cout << "\nDigite uma equação linear ou quadrática:\n";
 	cin >> equacao;
 	getline(cin, equacao);
-	while (!ehValida(equacao)){
+
+	while (!ehValida(equacao)) {
 		cout << "\nEquacao invalida\n\n";
 		cout << "Digite Novamente\n";
 		cin >> equacao;
@@ -340,28 +281,33 @@ int computadorResponde(){
 	// calculaRaizes(arr[0], arr[1], arr[2]);
 }
 
-//split();
-std::vector<std::string> split(std::string strToSplit, char delimeter)
-{
-	std::stringstream ss(strToSplit);
-	std::string item;
-	std::vector<std::string> splittedStrings;
-	while (std::getline(ss, item, delimeter))
-	{
-		splittedStrings.push_back(item);
+/*
+	for (int i = 0; i < equacao.length(); i++) {
+		if (equacao[i] == "=") {
+			if (i != (equacao.length - 1)) {
+				
+			}
+		} 
 	}
-	return splittedStrings;
+	*/
+
+
+//split();
+std::vector<std::string> split(std::string strToSplit, char delimeter) {
+    std::stringstream ss(strToSplit);
+    std::string item;
+    std::vector<std::string> splittedStrings;
+    while (std::getline(ss, item, delimeter)) {
+       splittedStrings.push_back(item);
+    }
+    return splittedStrings;
 }
 
-int usuarioResponde()
-{
-	cout << std::endl
-		 << "Modo do usuário escolhido!" << std::endl;
-	cout << "As respostas são sempre um número (2, 5, -9, 2/3) ou V" << std::endl;
-	cout << "V - Representa que o conjunto solução é vazio para o domínio dos Reais." << std::endl
-		 << std::endl;
-	cout << "Caso deseje sair, digite <s>" << std::endl
-		 << std::endl;
+int usuarioResponde() {
+	cout <<std::endl << "Modo do usuário escolhido!"<<std::endl;
+	cout << "As respostas são sempre um número (2, 5, -9, 2/3) ou V"<<std::endl;
+	cout << "V - Representa que o conjunto solução é vazio para o domínio dos Reais."<<std::endl<<std::endl;
+	cout << "Caso deseje sair, digite <s>"<<std::endl<<std::endl;
 	FILE *arq;
 	char matriz[linhas][caracteres];
 	char *result;
@@ -371,18 +317,17 @@ int usuarioResponde()
 	bool disponivel = false;
 	bool guard = true;
 	char answer[8];
+	
 
 	arq = fopen("data/equations-bd.txt", "rt");
 
-	if (arq == NULL)
-	{
+	if (arq == NULL) {
 		cout << "Problemas na abertura do arquivo\n";
 		return 0;
 	}
 
 	i = 0;
-	while (!feof(arq))
-	{
+	while (!feof(arq)) {
 		result = fgets(matriz[i], 200, arq);
 		i++;
 	}
@@ -390,14 +335,11 @@ int usuarioResponde()
 
 	srand(time(NULL));
 
-	do
-	{
+	do{
 
-		while (!disponivel)
-		{
+		while (!disponivel){
 			random = rand() % 40;
-			if (returned[random] != 'x')
-			{
+			if (returned[random] != 'x'){
 				disponivel = true;
 			}
 		}
@@ -405,31 +347,23 @@ int usuarioResponde()
 		disponivel = false;
 
 		std::vector<std::string> splittedQuest = split(matriz[random], '$');
-		std::cout << splittedQuest[0] << std::endl;
-		std::cout << splittedQuest[2] << std::endl;
+		std::cout<<splittedQuest[0]<<std::endl;
+		std::cout<<splittedQuest[2]<<std::endl;
 
 		cin >> answer;
-
-		if (!strcmp(answer, "s"))
-		{
+		
+		if(!strcmp(answer, "s")){
 			guard = false;
-		}
-		else if (answer == splittedQuest[1])
-		{
-			cout << "Acertou!" << std::endl
-				 << std::endl;
-		}
-		else
-		{
-			cout << "Errou!" << std::endl
-				 << std::endl;
+		} else if(answer == splittedQuest[1]){
+			cout << "Acertou!"<<std::endl<<std::endl;
+		}else{
+			cout << "Errou!"<<std::endl<<std::endl;
 		}
 
 	} while (guard);
 }
 
-int main()
-{
+int main() {
 
 	setlocale(LC_ALL, "Portuguese");
 
@@ -450,8 +384,9 @@ int main()
 
 	char opcao;
 	bool opInvalida = true;
-	do
-	{
+
+	do {
+
 		cout << "\n===========================================================================================\n";
 		cout << "                                Bem vindo ao Equations Solver!\n";
 		cout << "===========================================================================================\n";
@@ -465,14 +400,14 @@ int main()
 		opcao = tolower(opcao);
 		opInvalida = (opcao != 'r' && opcao != 'd' && opcao != 's');
 
-		if (opInvalida)
-		{
+		if (opInvalida) {
 			cout << "\nOpção inválida. Por favor tente novamente.\n\n";
 			system("pause");
 			system("cls");
 		}
 
 	} while (opInvalida);
+
 
 	if (opcao == 'd')
 	{
