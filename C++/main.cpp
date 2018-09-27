@@ -72,12 +72,12 @@
 	}
  	string equacao;
 	cout << "\nDigite uma equação linear ou quadrática:\n";
-	cin >> equacao;
-	getline(cin, equacao);
+	cin.ignore();
+ 	getline(cin,equacao);
  	while (!ehValida(equacao)) {
 		cout << "\nEquacao invalida\n\n";
 		cout << "Digite Novamente\n";
-		cin >> equacao;
+		cin.ignore();
 		getline(cin, equacao);
 	}
  	// Invoca Funcao para simplificacao da expressao deixando ela no formato ax^2 + bx + c = 0. Essa função retorna por ex um array dessa forma ->[a, b, c] a,b e c precisam ser float.
