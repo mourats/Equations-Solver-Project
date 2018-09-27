@@ -8,6 +8,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <cmath>
 
 #define linhas 40
 #define caracteres 200
@@ -281,16 +282,45 @@ void instrucoes()
 	cout << "d) 10x - 5 (1 + x) = 3(2x - 2) - 20 - Há espaço entre o 5 e o parêntesis.\n";
 }
 
-int computadorResponde()
-{
+void solucaoLinear(float a, float b){
+  float x = ((-1) * b) / a;
+  std :: cout.precision(3);
+  std :: cout << "A equação é linear e a sua solução é x = " << x << ".\n";
+}
+
+void calculaRaizes(float a, float b, float c){
+
+  if(a == 0){
+    solucaoLinear(b, c);
+  }else{
+    float delta = (b * b) - (4 * a * c);
+    if(delta < 0){
+      std :: cout << "O delta é negativo(" << delta << "), assim a equação não possui solução no conjunto dos números reais.\n";
+
+    }else if(delta == 0){
+      float res = ((-1) * b) / 2 * a;
+      std :: cout << "O delta é igual a zero, assim a equação possui duas soluções iguais a " << res << ".\n";
+    }
+    else{
+      float raiz = sqrt(delta);
+      float x1, x2;
+      x1 = (((-1) * b) + raiz) / 2 * a;
+      x2 = (((-1) * b) - raiz) / 2 * a;
+
+      std :: cout.precision(3);
+      std :: cout << "Como o delta é positivo(" << delta << "), a equação possui duas soluções distintas.\nSão elas: \n" << x1 << "\n" << x2 << "\n";
+    }
+  }
+}
+
+int computadorResponde(){
 
 	cout << "Modo do computador escolhido!\n";
 	cout << "\nDeseja consultar as instruções? Se sim digite S, se não, digite outra tecla.\n";
 	char inst;
 	cin >> inst;
 	inst = tolower(inst);
-	if (inst == 's')
-	{
+	if (inst == 's'){
 		instrucoes();
 	}
 
@@ -298,13 +328,16 @@ int computadorResponde()
 	cout << "\nDigite uma equação linear ou quadrática:\n";
 	cin >> equacao;
 	getline(cin, equacao);
-	while (!ehValida(equacao))
-	{
+	while (!ehValida(equacao)){
 		cout << "\nEquacao invalida\n\n";
 		cout << "Digite Novamente\n";
 		cin >> equacao;
 		getline(cin, equacao);
 	}
+
+	// Invoca Funcao para simplificacao da expressao deixando ela no formato ax^2 + bx + c = 0. Essa função retorna por ex um array dessa forma ->[a, b, c] a,b e c precisam ser float.
+	// se a equacao for linear o termo a será 0. Por fim fazemos:
+	// calculaRaizes(arr[0], arr[1], arr[2]);
 }
 
 //split();
@@ -406,7 +439,7 @@ int main()
     
     logo = fopen("C:/Users/USUARIO/Documents/Gabriel/UFCG/plp/Equations Solver/Equations-Solver-Project/C++/logomarca.txt","r"); // TA BUGADO, SE NÃO COLOCAR O CAMINHO TODO NÃO PEGA, POREM DEVERIA PORQUE O ARQUIVO ESTÁ NA MESMA PASTA QUE O MAIN
 	if(logo == NULL){
-		cout << "Arquivo <logomarca> não encontrado.\n";
+		cout << "Arquivo <logomarca.txt> não encontrado.\n";
 	}else{
 		while(!feof(logo)){
 			fgets(str, tamanho, logo);
