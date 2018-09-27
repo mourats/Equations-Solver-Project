@@ -1,5 +1,7 @@
 # Equations-Solver
 
+![ScreenShot](logo.png)
+
                                                                                                      
 Repositório destinado ao projeto de PLP
 
