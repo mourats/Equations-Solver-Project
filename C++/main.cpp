@@ -220,8 +220,15 @@ void simplificar(vector<string> &equacao){
       cout << equacao[i] << "\n"; 
       equacao[i] = "+";
       equacao[i+1] = "0";
-  		}
-	}
+    }else if(equacao[i][0] == '/'){
+    	novoGrau = getGrauTermo(equacao[i-1]) - getGrauTermo(equacao[i+1]);
+    	novaConstante = getConstante(equacao[i-1]) / getConstante(equacao[i+1]);
+    	equacao[i-1] = intToString(novaConstante) + "x^" + intToString(novoGrau);
+        equacao[i] = "+";
+   	equacao[i+1] = "0";
+  }
+ }
+	
 }
  
 bool ehSinal(string termo) {
