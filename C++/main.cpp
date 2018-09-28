@@ -61,6 +61,31 @@
     }
   }
 }
+
+ int getGrauTermo(string termo){
+  	bool constante = true;
+  	bool expoente = false;
+  	string grau = "";
+  	for(int i = 0; i < termo.length(); i++){
+    	if(expoente && (!constante)){
+      		grau += termo[i];
+    	}
+    	if(termo[i] == 'x'){
+      		grau = "1";
+      		constante = false;
+    	}else if(termo[i] == '^'){
+      		expoente = true;
+      		grau = "";
+    	} 
+  }
+  if(constante){
+    return 0;
+  }
+  stringstream geek(grau);
+  int intGrau = 0;
+  geek >> intGrau;
+  return intGrau; 
+}
  int computadorResponde() {
  	cout << "Modo do computador escolhido!\n";
 	cout << "\nDeseja consultar as instruções? Se sim digite S, se não, digite outra tecla.\n";
