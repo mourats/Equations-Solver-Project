@@ -179,7 +179,7 @@ std::vector<std::string> split(std::string strToSplit, char delimeter) {
 	}else{
 		while(!feof(logo)){
 			fgets(str, tamanho, logo);
-			cout << str << endl;
+			cout << str;
 		} 
 		fclose(logo);
 	}
