@@ -12,8 +12,6 @@ bool ehValida(string equacao){
   int parenteses = 0;
   int igual = 1;
   for(int i = 0; i < equacao.length();++i){
-    cout << equacao[i] << " ";
-    cout << state << "\n";
     if(state == "INICIAL"){
         if(equacao[i] == 'x'){
             state = "X";
