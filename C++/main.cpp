@@ -62,6 +62,13 @@
   }
 }
 
+int stringToInt(string valor){
+  stringstream geek(valor);
+  int intGrau = 0;
+  geek >> intGrau;
+  return intGrau; 
+}
+
  int getGrauTermo(string termo){
   	bool constante = true;
   	bool expoente = false;
@@ -81,11 +88,29 @@
   if(constante){
     return 0;
   }
-  stringstream geek(grau);
-  int intGrau = 0;
-  geek >> intGrau;
-  return intGrau; 
+  return stringToInt(grau);
+
 }
+
+int getConstante(string termo){
+  bool digito = false;
+  string constante;
+  int i = 0;
+  while(i < termo.length()){
+    if(isdigit(termo[i])){
+      constante += termo[i];
+      digito = true;
+    }else{
+      break;
+    }
+    i++;
+  }
+  if(!digito){
+    return 1;
+  }
+  return stringToInt(constante);
+}
+
  int computadorResponde() {
  	cout << "Modo do computador escolhido!\n";
 	cout << "\nDeseja consultar as instruções? Se sim digite S, se não, digite outra tecla.\n";
