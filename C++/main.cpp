@@ -69,6 +69,53 @@ int stringToInt(string valor){
   return intGrau; 
 }
 
+string intToString(int valor){
+  stringstream ss;
+  ss << valor;
+  string str = ss.str();
+  return str;
+}
+
+void simplificar(vector<string> &equacao){
+  int novoGrau = 0;
+  int novaConstante = 0;
+  for(int i = 1; i < equacao.size() - 1;i++){
+    if(equacao[i][0] == '*'){
+      novoGrau = getGrauTermo(equacao[i-1]) + getGrauTermo(equacao[i+1]);
+      novaConstante = getConstante(equacao[i-1]) * getConstante(equacao[i+1]);
+      equacao[i-1] = intToString(novaConstante) + "x^" + intToString(novoGrau);
+      cout << equacao[i] << "\n"; 
+      equacao[i] = "+";
+      equacao[i+1] = "0";
+  }
+}
+
+bool ehSinal(string termo){
+  return termo[0] == '+' || termo[0] == '-' || termo[0] == '*' || termo[0] == '/' || termo[0] == '=';
+}
+
+void resolverEquacao(vector<string> equacao){
+  int valores[3] = {0,0,0};
+  int grau = 0;
+  int valor = 0;
+  bool igual = false;
+  for(int i = 0; i < equacao.size(); i++){
+    if(equacao[i][0] == '=') igual = true;
+    if(!ehSinal(equacao[i])){
+      grau = getGrauTermo(equacao[i]);
+      valor = getConstante(equacao[i]);
+     if(i != 0 && equacao[i - 1][0] == '-'){
+        valor = -1 * valor;
+     }
+     if(igual) valor = -1 * valor;
+     valores[grau] += valor;
+    }
+  }
+  calculaRaizes(valores[2],valores[1],valores[0]);
+
+}
+
+
  int getGrauTermo(string termo){
   	bool constante = true;
   	bool expoente = false;
