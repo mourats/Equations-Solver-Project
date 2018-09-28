@@ -27,23 +27,24 @@ using namespace std;
 	cout << "a) x * x = 4\n";
 	cout << "b) x^2 / 1 = 9\n";
 	cout << "c) 18x - 43 = 65\n";
-	cout << "d) x(3x / 2) = 100\n";
-	cout << "e) (x - 2)(x - 1) = 2\n";
-	cout << "f) (x^2 - 2(4x - 1) - 0) = 0\n";
-	cout << "g) 10x - 5(1 + x) = 3(2x - 2) - 20\n";
-	cout << "h) x(x + 4) + x(x + 2) = 2x^2 + 12\n";
-	cout << "i) (x - 5) / 10 + (1 - 2x) / 5 = (3 - x) / 4\n";
+	cout << "d) x^2 + 5x / 2 - 3 / 2 = 0\n";
+
  	cout << "\nExemplos de expressões INVÁLIDAS:\n\n";
-	cout << "a) x(3x/2) = 1350 - Os termos devem estar espaçados da barra.\n";
-	cout << "b) 2y^2 - 8 = 0 - Não é aceito outra variável que não seja x.\n";
-	cout << "c) 4x (x + 6) - x^2 = 5x^2 - Há espaço entre o 4x e o parêntesis.\n";
-	cout << "d) 10x - 5 (1 + x) = 3(2x - 2) - 20 - Há espaço entre o 5 e o parêntesis.\n";
+	cout << "a) 2y^2 - 8 = 0 - Não é aceito outra variável que não seja x.\n";
+	cout << "d) x^2 + 5x/2 - 3/2 = 0 - É necessário ter espaços entre o termo e o /.\n";
+	cout << "e) 3x^2 - 24x + 5 = -6x^2 - 11 -É necessário ter espaço entre o - e o 6.\n";
 }
 
 void solucaoLinear(float a, float b){
-  float x = ((-1) * b) / a;
-  std :: cout.precision(3);
-  std :: cout << "A equação é linear e a sua solução é x = " << x << ".\n";
+
+	if(a == 0){
+		cout << "A equação é linear porém a operação - b/a, gera uma divisão por zero, não possuindo solução.\n";
+	}
+	else{
+		float x = ((-1) * b) / a;
+		std :: cout.precision(3);
+		std :: cout << "A equação é linear e a sua solução é x = " << x << ".\n";
+	}
 }
 
 void calculaRaizes(float a, float b, float c){
@@ -285,12 +286,12 @@ int computadorResponde() {
 		equacao = tolower(equacao[0]);
 	}
 	
-	if(equacao == "e") {
-		guard = true;
-	}
-
  	while (!ehValida(equacao) && !guard) {
 
+		if(equacao == "e") {
+			guard = true;
+			break;
+		}
 		cout << "\nEquacao invalida\n\n";
 		cout << "Digite Novamente\n";
 		getline(cin, equacao);
