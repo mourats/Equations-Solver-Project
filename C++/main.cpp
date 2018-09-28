@@ -20,9 +20,7 @@ using namespace std;
  void instrucoes() {
 	cout << "====================================== INSTRUÇÕES =========================================";
 	cout << "\n1) A variável usada deve ser sempre x;\n";
-	cout << "2) É necessário que os termos sejam separados por espaço e os\n";
-	cout << "sinais também, entretanto termos que multiplicam uma expressão\n";
-	cout << "entre parêntesis não devem ser separados do parêntesis.\n";
+	cout << "2) É necessário que os termos sejam separados por espaço e os sinais também.\n";
  	cout << "\nExemplos de expressões VÁLIDAS:\n\n";
 	cout << "a) x * x = 4\n";
 	cout << "b) x^2 / 1 = 9\n";
@@ -158,7 +156,7 @@ int usuarioResponde() {
  	} while (opInvalida);
  	if (opcao == 'p') {
 		cout << "---- Modo equações do Primeiro Grau escolhido! ---- \n\n";
-		cout << "As respostas são sempre um número (2, 5, -9, 2/3)"<<std::endl<<std::endl;
+		cout << "As respostas são sempre um número. Exemplos: (2, 5, -9, 2/3)"<<std::endl<<std::endl;
 		arq = fopen("data/first-degree-equations-bd.txt", "rt");
 	} else if (opcao == 's') {
 		cout << "---- Modo equações do Segundo Grau escolhido! ---- \n\n";
@@ -189,7 +187,7 @@ int usuarioResponde() {
 		returned[random] = 'x';
 		disponivel = false;
  		std::vector<std::string> splittedQuest = split(matriz[random], '$');
-		std::cout<<splittedQuest[0]<<std::endl;
+		std::cout<<"Problema: "<<splittedQuest[0]<<std::endl;
 		std::cout<<splittedQuest[2]<<std::endl;
  		cin >> answer;
 		
@@ -198,7 +196,8 @@ int usuarioResponde() {
 		} else if(answer == splittedQuest[1]){
 			cout << "ACERTOU! :)"<<std::endl<<std::endl;
 		}else{
-			cout << "ERROU! :("<<std::endl<<std::endl;
+			cout << "ERROU! :("<<std::endl;
+			cout << "A resposta correta é: " << splittedQuest[1]<<std::endl<<std::endl;
 		}
  	} while (guard);
 }
