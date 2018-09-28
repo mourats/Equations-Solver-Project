@@ -9,10 +9,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <cmath>
+
  #include "validate.h"
- #define linhas 40
+
+#define linhas 40
 #define caracteres 200
- using namespace std;
+
+using namespace std;
+
  void instrucoes() {
 	cout << "====================================== INSTRUÇÕES =========================================";
 	cout << "\n1) A variável usada deve ser sempre x;\n";
@@ -35,13 +39,15 @@
 	cout << "c) 4x (x + 6) - x^2 = 5x^2 - Há espaço entre o 4x e o parêntesis.\n";
 	cout << "d) 10x - 5 (1 + x) = 3(2x - 2) - 20 - Há espaço entre o 5 e o parêntesis.\n";
 }
- void solucaoLinear(float a, float b){
+
+void solucaoLinear(float a, float b){
   float x = ((-1) * b) / a;
   std :: cout.precision(3);
   std :: cout << "A equação é linear e a sua solução é x = " << x << ".\n";
 }
- void calculaRaizes(float a, float b, float c){
-   if(a == 0){
+
+void calculaRaizes(float a, float b, float c){
+  if(a == 0){
     solucaoLinear(b, c);
   }else{
     float delta = (b * b) - (4 * a * c);
@@ -69,54 +75,7 @@ int stringToInt(string valor){
   return intGrau; 
 }
 
-string intToString(int valor){
-  stringstream ss;
-  ss << valor;
-  string str = ss.str();
-  return str;
-}
-
-void simplificar(vector<string> &equacao){
-  int novoGrau = 0;
-  int novaConstante = 0;
-  for(int i = 1; i < equacao.size() - 1;i++){
-    if(equacao[i][0] == '*'){
-      novoGrau = getGrauTermo(equacao[i-1]) + getGrauTermo(equacao[i+1]);
-      novaConstante = getConstante(equacao[i-1]) * getConstante(equacao[i+1]);
-      equacao[i-1] = intToString(novaConstante) + "x^" + intToString(novoGrau);
-      cout << equacao[i] << "\n"; 
-      equacao[i] = "+";
-      equacao[i+1] = "0";
-  }
-}
-
-bool ehSinal(string termo){
-  return termo[0] == '+' || termo[0] == '-' || termo[0] == '*' || termo[0] == '/' || termo[0] == '=';
-}
-
-void resolverEquacao(vector<string> equacao){
-  int valores[3] = {0,0,0};
-  int grau = 0;
-  int valor = 0;
-  bool igual = false;
-  for(int i = 0; i < equacao.size(); i++){
-    if(equacao[i][0] == '=') igual = true;
-    if(!ehSinal(equacao[i])){
-      grau = getGrauTermo(equacao[i]);
-      valor = getConstante(equacao[i]);
-     if(i != 0 && equacao[i - 1][0] == '-'){
-        valor = -1 * valor;
-     }
-     if(igual) valor = -1 * valor;
-     valores[grau] += valor;
-    }
-  }
-  calculaRaizes(valores[2],valores[1],valores[0]);
-
-}
-
-
- int getGrauTermo(string termo){
+int getGrauTermo(string termo){
   	bool constante = true;
   	bool expoente = false;
   	string grau = "";
@@ -158,29 +117,6 @@ int getConstante(string termo){
   return stringToInt(constante);
 }
 
- int computadorResponde() {
- 	cout << "Modo do computador escolhido!\n";
-	cout << "\nDeseja consultar as instruções? Se sim digite S, se não, digite outra tecla.\n";
-	char inst;
-	cin >> inst;
-	inst = tolower(inst);
- 	if (inst == 's') {
-		instrucoes();
-	}
- 	string equacao;
-	cout << "\nDigite uma equação linear ou quadrática:\n";
-	cin.ignore();
- 	getline(cin,equacao);
- 	while (!ehValida(equacao)) {
-		cout << "\nEquacao invalida\n\n";
-		cout << "Digite Novamente\n";
-		cin.ignore();
-		getline(cin, equacao);
-	}
- 	// Invoca Funcao para simplificacao da expressao deixando ela no formato ax^2 + bx + c = 0. Essa função retorna por ex um array dessa forma ->[a, b, c] a,b e c precisam ser float.
-	// se a equacao for linear o termo a será 0. Por fim fazemos:
-	// calculaRaizes(arr[0], arr[1], arr[2]);
-}
  //split();
 std::vector<std::string> split(std::string strToSplit, char delimeter) {
     std::stringstream ss(strToSplit);
@@ -191,7 +127,8 @@ std::vector<std::string> split(std::string strToSplit, char delimeter) {
     }
     return splittedStrings;
 }
- int usuarioResponde() {
+
+int usuarioResponde() {
  	FILE *arq;
 	char matriz[linhas][caracteres];
 	char *result;
@@ -264,7 +201,87 @@ std::vector<std::string> split(std::string strToSplit, char delimeter) {
 		}
  	} while (guard);
 }
- int main() {
+
+string intToString(int valor){
+  stringstream ss;
+  ss << valor;
+  string str = ss.str();
+  return str;
+}
+ 
+void simplificar(vector<string> &equacao){
+  int novoGrau = 0;
+  int novaConstante = 0;
+  for(int i = 1; i < equacao.size() - 1;i++){
+    if(equacao[i][0] == '*'){
+      novoGrau = getGrauTermo(equacao[i-1]) + getGrauTermo(equacao[i+1]);
+      novaConstante = getConstante(equacao[i-1]) * getConstante(equacao[i+1]);
+      equacao[i-1] = intToString(novaConstante) + "x^" + intToString(novoGrau);
+      cout << equacao[i] << "\n"; 
+      equacao[i] = "+";
+      equacao[i+1] = "0";
+  		}
+	}
+}
+ 
+bool ehSinal(string termo) {
+  return termo[0] == '+' || termo[0] == '-' || termo[0] == '*' || termo[0] == '/' || termo[0] == '=';
+}
+ 
+void resolverEquacao(vector<string> equacao){
+  int valores[3] = {0,0,0};
+  int grau = 0;
+  int valor = 0;
+  bool igual = false;
+  for(int i = 0; i < equacao.size(); i++){
+    if(equacao[i][0] == '=') igual = true;
+    if(!ehSinal(equacao[i])){
+      grau = getGrauTermo(equacao[i]);
+      valor = getConstante(equacao[i]);
+     if(i != 0 && equacao[i - 1][0] == '-'){
+        valor = -1 * valor;
+     }
+     if(igual) valor = -1 * valor;
+     valores[grau] += valor;
+    }
+  }
+  calculaRaizes(valores[2],valores[1],valores[0]);
+ 
+}
+
+int computadorResponde() {
+ 	cout << "Modo do computador escolhido!\n";
+	cout << "\nDeseja consultar as instruções? Se sim digite S, se não, digite outra tecla.\n";
+	char inst;
+	cin >> inst;
+	inst = tolower(inst);
+ 	if (inst == 's') {
+		instrucoes();
+	}
+	
+ 	string equacao;
+	cout << "\nDigite uma equação linear ou quadrática:\n";
+	cin.ignore();
+ 	getline(cin,equacao);
+ 	while (!ehValida(equacao)) {
+		cout << "\nEquacao invalida\n\n";
+		cout << "Digite Novamente\n";
+		cin.ignore();
+		getline(cin, equacao);
+	}
+
+	std::vector<std::string> splitted = split(equacao, ' ');
+
+	simplificar(splitted);
+	resolverEquacao(splitted);
+
+ 	// Invoca Funcao para simplificacao da expressao deixando ela no formato ax^2 + bx + c = 0. Essa função retorna por ex um array dessa forma ->[a, b, c] a,b e c precisam ser float.
+	// se a equacao for linear o termo a será 0. Por fim fazemos:
+	// calculaRaizes(arr[0], arr[1], arr[2]);
+}
+
+
+int main() {
  	setlocale(LC_ALL, "Portuguese");
  	int tamanho = 100;
     char str[100];
