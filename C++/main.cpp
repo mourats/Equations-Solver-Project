@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <cmath>
 
- #include "validate.h"
+#include "validate.h"
 
 #define linhas 40
 #define caracteres 200
@@ -267,26 +267,46 @@ int computadorResponde() {
 	}
 	
  	string equacao;
-	cout << "\nDigite uma equação linear ou quadrática:\n";
+	bool guard = false;
+	cout << "\nCaso deseje sair, digite 'E'."<<std::endl;
+
+	cout << "\nDigite uma equação linear ou quadrática:"<<std::endl;
 	cin.ignore();
  	getline(cin,equacao);
- 	while (!ehValida(equacao)) {
+
+	do {
+
+	if(equacao == ""){
+		cout << "\nDigite uma equação linear ou quadrática:"<<std::endl;
+		getline(cin,equacao);
+	}
+	
+	if(equacao.size() == 1){
+		equacao = tolower(equacao[0]);
+	}
+	
+	if(equacao == "e") {
+		guard = true;
+	}
+
+ 	while (!ehValida(equacao) && !guard) {
+
 		cout << "\nEquacao invalida\n\n";
 		cout << "Digite Novamente\n";
-		cin.ignore();
 		getline(cin, equacao);
 	}
 
-	std::vector<std::string> splitted = split(equacao, ' ');
+		if(!guard){
+			std::vector<std::string> splitted = split(equacao, ' ');
 
-	simplificar(splitted);
-	resolverEquacao(splitted);
+			simplificar(splitted);
+			resolverEquacao(splitted);
+		}
 
- 	// Invoca Funcao para simplificacao da expressao deixando ela no formato ax^2 + bx + c = 0. Essa função retorna por ex um array dessa forma ->[a, b, c] a,b e c precisam ser float.
-	// se a equacao for linear o termo a será 0. Por fim fazemos:
-	// calculaRaizes(arr[0], arr[1], arr[2]);
+		equacao = "";
+
+	} while(!guard);
 }
-
 
 int main() {
  	setlocale(LC_ALL, "Portuguese");

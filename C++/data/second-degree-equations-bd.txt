@@ -2,7 +2,7 @@
 x^2 - 5x + 6 = 0$2$Dica: O número é par.
 4x^2 = 4x - 1$1/2$Dica: O número é fracionário.
 3x^2 + x = -2x^2 - 6$V$Dica: O delta é negativo.
-3x^2 + 4x + 1 = 0$0$Dica: O  número é inteiro.
+3x^2 + 4x + 1 = 0$-1$Dica: O  número é inteiro.
 8x^2 + 6x = 0$-3/4$Dica: O número é fracionário.
 2x^2 + 1 = 0$V$Dica: O delta é negativo.
 3x^2 = x + 2$1$Dica: O número é inteiro.
