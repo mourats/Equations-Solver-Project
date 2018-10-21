@@ -3,6 +3,9 @@ import Data.Char
 import Control.Monad
 
 
+lowerCase :: String -> String
+lowerCase palavra = map toLower (palavra)
+
 instrucoes :: IO()
 instrucoes = do
     putStrLn ("====================================== INSTRUÇÕES =========================================")
@@ -70,27 +73,24 @@ usuarioResponde = do
         putStrLn ("Caso deseje sair, digite <E>")
 
         op <- getLine
-         -- Falta toLower
+        let operacao = lowerCase (op)
     
-        if (op == "P") then do
+        if (operacao == "p") then do
         putStrLn ("---- Modo equações do Primeiro Grau escolhido! ---- ")
         putStrLn ("As respostas são sempre um número. Exemplos: (2, 5, -9, 2/3)")
             -- Leitura do arquivo first-degree-equations-bd.txt
-        else if (op == "S") then do            
+        else if (operacao == "s") then do            
         putStrLn ("---- Modo equações do Segundo Grau escolhido! ---- ")
         putStrLn ("As respostas são sempre um número (2, 5, -9, 2/3) ou V")
         putStrLn ("V - Representa que o conjunto solução é vazio para o domínio dos Reais.")
             -- Leitura do arquivo second-degree-equations-bd.txt
-        else if (op == "E") then exitWith $ ExitFailure 3
+        else if (operacao == "e") then exitWith $ ExitFailure 3
         else do  
             putStrLn ("Opção inválida. Por favor tente novamente.")
             loop
     loop
 
     -- Leitura e exibição linha por linha
-
-
-
 
 
 computadorResponde :: IO()
@@ -101,39 +101,59 @@ computadorResponde = do
     putStrLn ("");
     inst <- getLine
     let consultar = inst
-    let consultar = map toLower inst
+    let consultar = lowerCase (inst)
     if (consultar == "s") then instrucoes else putStr ("")
 
-    let guard = False
-    --putStrLn ("Caso deseje sair, digite 'E'.");
-    --putStrLn ("");
-    putStrLn ("Digite uma equação linear ou quadrática:");
-    equacao <- getLine
+    putStrLn ("Caso deseje sair, digite 'E'.");
+    putStrLn ("");
+    
+    let loopGetEquacao = do
+        putStrLn ("Digite uma equação linear ou quadrática:");
+        equacao <- getLine
+        if (equacao == "e") then exitWith $ ExitFailure 3 
+        else if (equacao == "") then loopGetEquacao 
+        else do
+            if (ehValidaaaaa equacao) -- if(ehValida equacao)
+            then do
+                let splitted = words equacao
+                -- SE QUISER VERIFICAR COMO O ARRAY FICA USE print(splitted), O RESULTADO É ASSIM ["2x^2","+","4","=","0"]
+                --let simplificada = simplificar (splitted)
+                --resolverEquacao (simplificada)
+                putStr ("")
+            else do
+                putStrLn ("Equação inválida!")
+                putStrLn ("")
+                loopGetEquacao
+            
+    loopGetEquacao
 
-    let loopGuard = do
-        if (equacao == "") then putStrLn ("Digite uma equação linear ou quadrática:") else putStr ("")
-        
-    loopGuard
+-- APAGAR ISSO QUANDO ARI COLOCAR A CERTA
+ehValidaaaaa :: String -> Bool
+ehValidaaaaa e
+    |e == "2x^2 + 4 = 0" = True
+    |otherwise = False
     
 
 start :: IO()
 start = do
     let loop = do
+        putStrLn ("")
         putStrLn ("===========================================================================================")
         putStrLn ("                                Bem vindo ao Equations Solver!                             ")
         putStrLn ("===========================================================================================")
         putStrLn ("=========================================== MENU ==========================================")
+        putStrLn ("")
         putStrLn ("Escolha uma das opções abaixo:")
         putStrLn ("Modo Digitar equações (D)")
         putStrLn ("Modo Descobrir resultados (R)")
         putStrLn ("Encerrar programa (E)")
 
         op <- getLine
-        -- Falta toLower
+        let operacao = lowerCase (op)
     
-        if (op == "D") then computadorResponde 
-        else if (op == "R") then usuarioResponde 
-        else if (op == "E") then exitWith $ ExitFailure 3
+        if (operacao == "d") then computadorResponde 
+        else if (operacao == "r") then usuarioResponde 
+        else if (operacao == "e") then exitWith $ ExitFailure 3
         else do 
             putStrLn ("Opção inválida. Por favor tente novamente.")
             loop
