@@ -35,18 +35,18 @@ usuarioResponde = do
         putStrLn ("Caso deseje sair, digite <E>")
 
         op <- getLine
-         -- Falta toLower
+        let operacao = map toLower (op)
     
-        if (op == "P") then do
+        if (operacao == "p") then do
         putStrLn ("---- Modo equações do Primeiro Grau escolhido! ---- ")
         putStrLn ("As respostas são sempre um número. Exemplos: (2, 5, -9, 2/3)")
             -- Leitura do arquivo first-degree-equations-bd.txt
-        else if (op == "S") then do            
+        else if (operacao == "s") then do            
         putStrLn ("---- Modo equações do Segundo Grau escolhido! ---- ")
         putStrLn ("As respostas são sempre um número (2, 5, -9, 2/3) ou V")
         putStrLn ("V - Representa que o conjunto solução é vazio para o domínio dos Reais.")
             -- Leitura do arquivo second-degree-equations-bd.txt
-        else if (op == "E") then exitWith $ ExitFailure 3
+        else if (operacao == "e") then exitWith $ ExitFailure 3
         else do  
             putStrLn ("Opção inválida. Por favor tente novamente.")
             loop
