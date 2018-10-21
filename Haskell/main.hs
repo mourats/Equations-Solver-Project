@@ -1,5 +1,6 @@
 import Control.Monad
 import System.Exit
+import Data.Char
 
 instrucoes :: IO()
 instrucoes = do
@@ -21,6 +22,7 @@ instrucoes = do
 	putStrLn ("a) 2y^2 - 8 = 0 - Não é aceito outra variável que não seja x.");
 	putStrLn ("d) x^2 + 5x/2 - 3/2 = 0 - É necessário ter espaços entre o termo e o /.");
 	putStrLn ("e) 3x^2 - 24x + 5 = -6x^2 - 11 -É necessário ter espaço entre o - e o 6.");
+    putStrLn ("");
 
 
 usuarioResponde :: IO()
@@ -36,8 +38,19 @@ computadorResponde = do
     putStrLn ("");
     inst <- getLine
     let consultar = inst
-    --let consultar = toLower (inst)
-    if (consultar == "s") then instrucoes else putStrLn ("")
+    let consultar = map toLower inst
+    if (consultar == "s") then instrucoes else putStr ("")
+
+    let guard = False
+    --putStrLn ("Caso deseje sair, digite 'E'.");
+    --putStrLn ("");
+    putStrLn ("Digite uma equação linear ou quadrática:");
+    equacao <- getLine
+
+    let loopGuard = do
+        if (equacao == "") then putStrLn ("Digite uma equação linear ou quadrática:") else putStr ("")
+        
+    loopGuard
     
 
 start :: IO()
@@ -60,7 +73,7 @@ start = do
         let opInvalida = (opcao /= "r" && opcao /= "d" && opcao /= "e");
 
         if (opInvalida) then putStrLn "Opção inválida. Por favor tente novamente."
-        else putStrLn ""
+        else putStr ""
         
         when (opInvalida) loop
     loop
