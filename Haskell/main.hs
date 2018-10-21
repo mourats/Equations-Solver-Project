@@ -94,11 +94,11 @@ start = do
         putStrLn ("Encerrar programa (E)")
 
         op <- getLine
-        -- Falta toLower
+        let operacao = map toLower (op)
     
-        if (op == "D") then computadorResponde 
-        else if (op == "R") then usuarioResponde 
-        else if (op == "E") then exitWith $ ExitFailure 3
+        if (operacao == "d") then computadorResponde 
+        else if (operacao == "r") then usuarioResponde 
+        else if (operacao == "e") then exitWith $ ExitFailure 3
         else do 
             putStrLn ("Opção inválida. Por favor tente novamente.")
             loop
