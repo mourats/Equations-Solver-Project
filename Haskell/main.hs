@@ -1,4 +1,3 @@
-import Control.Monad
 import System.Exit
 import Data.Char
 
@@ -27,7 +26,36 @@ instrucoes = do
 
 usuarioResponde :: IO()
 usuarioResponde = do
-    putStrLn ("responde danado")
+
+    let loop = do
+        putStrLn ("----Modo do usuário escolhido!----")
+        putStrLn ("Escolha um tipo de equação:")
+        putStrLn ("Primeiro Grau (P)")
+        putStrLn ("Segundo Grau (S)")
+        putStrLn ("Caso deseje sair, digite <E>")
+
+        op <- getLine
+         -- Falta toLower
+    
+        if (op == "P") then do
+        putStrLn ("---- Modo equações do Primeiro Grau escolhido! ---- ")
+        putStrLn ("As respostas são sempre um número. Exemplos: (2, 5, -9, 2/3)")
+            -- Leitura do arquivo first-degree-equations-bd.txt
+        else if (op == "S") then do            
+        putStrLn ("---- Modo equações do Segundo Grau escolhido! ---- ")
+        putStrLn ("As respostas são sempre um número (2, 5, -9, 2/3) ou V")
+        putStrLn ("V - Representa que o conjunto solução é vazio para o domínio dos Reais.")
+            -- Leitura do arquivo second-degree-equations-bd.txt
+        else if (op == "E") then exitWith $ ExitFailure 3
+        else do  
+            putStrLn ("Opção inválida. Por favor tente novamente.")
+            loop
+    loop
+
+    -- Leitura e exibição linha por linha
+
+
+
 
 
 computadorResponde :: IO()
@@ -55,7 +83,6 @@ computadorResponde = do
 
 start :: IO()
 start = do
-    
     let loop = do
         putStrLn ("===========================================================================================")
         putStrLn ("                                Bem vindo ao Equations Solver!                             ")
@@ -66,19 +93,18 @@ start = do
         putStrLn ("Modo Descobrir resultados (R)")
         putStrLn ("Encerrar programa (E)")
 
-        opcao <- getLine   
-
-        if (opcao == "d") then computadorResponde else if (opcao == "r") then usuarioResponde else exitWith $ ExitFailure 3;
-
-        let opInvalida = (opcao /= "r" && opcao /= "d" && opcao /= "e");
-
-        if (opInvalida) then putStrLn "Opção inválida. Por favor tente novamente."
-        else putStr ""
-        
-        when (opInvalida) loop
+        op <- getLine
+        -- Falta toLower
+    
+        if (op == "D") then computadorResponde 
+        else if (op == "R") then usuarioResponde 
+        else if (op == "E") then exitWith $ ExitFailure 3
+        else do 
+            putStrLn ("Opção inválida. Por favor tente novamente.")
+            loop
     loop
 
-	   
+main :: IO()
 main = do
     start
 
