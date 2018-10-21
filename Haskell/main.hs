@@ -136,13 +136,19 @@ ehValidaaaaa e
 
 start :: IO()
 start = do
+
+    let logomarca = do
+        logo <- readFile "data/logomarca.txt"
+        putStrLn (logo)
+    logomarca
+
+    putStrLn ("")
+    putStrLn ("===========================================================================================")
+    putStrLn ("                                Bem vindo ao Equations Solver!                             ")
+    putStrLn ("===========================================================================================")
+    putStrLn ("=========================================== MENU ==========================================")
+    putStrLn ("")
     let loop = do
-        putStrLn ("")
-        putStrLn ("===========================================================================================")
-        putStrLn ("                                Bem vindo ao Equations Solver!                             ")
-        putStrLn ("===========================================================================================")
-        putStrLn ("=========================================== MENU ==========================================")
-        putStrLn ("")
         putStrLn ("Escolha uma das opções abaixo:")
         putStrLn ("Modo Digitar equações (D)")
         putStrLn ("Modo Descobrir resultados (R)")
@@ -156,6 +162,7 @@ start = do
         else if (operacao == "e") then exitWith $ ExitFailure 3
         else do 
             putStrLn ("Opção inválida. Por favor tente novamente.")
+            putStrLn ("")            
             loop
     loop
 
