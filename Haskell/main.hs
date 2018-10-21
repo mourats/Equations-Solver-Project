@@ -1,6 +1,9 @@
 import System.Exit
 import Data.Char
 
+lowerCase :: String -> String
+lowerCase palavra = map toLower (palavra)
+
 instrucoes :: IO()
 instrucoes = do
     putStrLn ("====================================== INSTRUÇÕES =========================================")
@@ -35,7 +38,7 @@ usuarioResponde = do
         putStrLn ("Caso deseje sair, digite <E>")
 
         op <- getLine
-        let operacao = map toLower (op)
+        let operacao = lowerCase (op)
     
         if (operacao == "p") then do
         putStrLn ("---- Modo equações do Primeiro Grau escolhido! ---- ")
@@ -55,9 +58,6 @@ usuarioResponde = do
     -- Leitura e exibição linha por linha
 
 
-
-
-
 computadorResponde :: IO()
 computadorResponde = do
     putStrLn ("");
@@ -66,35 +66,56 @@ computadorResponde = do
     putStrLn ("");
     inst <- getLine
     let consultar = inst
-    let consultar = map toLower inst
+    let consultar = lowerCase (inst)
     if (consultar == "s") then instrucoes else putStr ("")
 
     let guard = False
-    --putStrLn ("Caso deseje sair, digite 'E'.");
-    --putStrLn ("");
-    putStrLn ("Digite uma equação linear ou quadrática:");
-    equacao <- getLine
-
+    putStrLn ("Caso deseje sair, digite 'E'.");
+    putStrLn ("");
+    
     let loopGuard = do
-        if (equacao == "") then putStrLn ("Digite uma equação linear ou quadrática:") else putStr ("")
-        
+        putStrLn ("Digite uma equação linear ou quadrática:");
+        equacao <- getLine
+        if (equacao == "e") then exitWith $ ExitFailure 3 
+        else if (equacao == "") then loopGuard 
+        else do
+            if (ehValidaaaaa equacao) -- if(ehValida equacao)
+            then do
+                let splitted = words equacao
+                -- SE QUISER VERIFICAR COMO O ARRAY FICA USE print(splitted), O RESULTADO É ASSIM ["2x^2","+","4","=","0"]
+                --let simplificada = simplificar (splitted)
+                --resolverEquacao (simplificada)
+                putStr ("")
+            else do
+                putStrLn ("Equação inválida!")
+                putStrLn ("")
+                loopGuard
+            
     loopGuard
+
+-- APAGAR ISSO QUANDO ARI COLOCAR A CERTA
+ehValidaaaaa :: String -> Bool
+ehValidaaaaa e
+    |e == "2x^2 + 4 = 0" = True
+    |otherwise = False
     
 
 start :: IO()
 start = do
     let loop = do
+        putStrLn ("")
         putStrLn ("===========================================================================================")
         putStrLn ("                                Bem vindo ao Equations Solver!                             ")
         putStrLn ("===========================================================================================")
         putStrLn ("=========================================== MENU ==========================================")
+        putStrLn ("")
         putStrLn ("Escolha uma das opções abaixo:")
         putStrLn ("Modo Digitar equações (D)")
         putStrLn ("Modo Descobrir resultados (R)")
         putStrLn ("Encerrar programa (E)")
 
         op <- getLine
-        let operacao = map toLower (op)
+        let operacao = lowerCase (op)
     
         if (operacao == "d") then computadorResponde 
         else if (operacao == "r") then usuarioResponde 
