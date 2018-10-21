@@ -69,15 +69,14 @@ computadorResponde = do
     let consultar = lowerCase (inst)
     if (consultar == "s") then instrucoes else putStr ("")
 
-    let guard = False
     putStrLn ("Caso deseje sair, digite 'E'.");
     putStrLn ("");
     
-    let loopGuard = do
+    let loopGetEquacao = do
         putStrLn ("Digite uma equação linear ou quadrática:");
         equacao <- getLine
         if (equacao == "e") then exitWith $ ExitFailure 3 
-        else if (equacao == "") then loopGuard 
+        else if (equacao == "") then loopGetEquacao 
         else do
             if (ehValidaaaaa equacao) -- if(ehValida equacao)
             then do
@@ -89,9 +88,9 @@ computadorResponde = do
             else do
                 putStrLn ("Equação inválida!")
                 putStrLn ("")
-                loopGuard
+                loopGetEquacao
             
-    loopGuard
+    loopGetEquacao
 
 -- APAGAR ISSO QUANDO ARI COLOCAR A CERTA
 ehValidaaaaa :: String -> Bool
