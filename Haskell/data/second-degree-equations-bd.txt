@@ -1,0 +1,40 @@
+3x^2 - 2x = 0$2/3$Dica: O número é fracionário.
+x^2 - 5x + 6 = 0$2$Dica: O número é par.
+4x^2 = 4x - 1$1/2$Dica: O número é fracionário.
+3x^2 + x = -2x^2 - 6$V$Dica: O delta é negativo.
+3x^2 + 4x + 1 = 0$-1$Dica: O  número é inteiro.
+8x^2 + 6x = 0$-3/4$Dica: O número é fracionário.
+2x^2 + 1 = 0$V$Dica: O delta é negativo.
+3x^2 = x + 2$1$Dica: O número é inteiro.
+4x^2 - 16 = 0$-2$Dica: O número é negativo.
+5x^2 + 8x + 10 = 0$V$Dica: O delta é negativo.
+(x - 2)(x - 1) = 2$3$Dica: O número é divisor de 48.
+x^2 - x - 5 = - x^2 + 2x$5/2$Dica: O número multiplicado por 2 gera um divisor de 45.
+x(x + 20) = 525$-35$Dica: O número é ímpar e negativo.
+x * 3x/2 = 1350$30$Dica: O número é par e múltiplo de 6.
+x^2 - 3 = 4x + 2$-1$Dica: O  número multiplicado por ele mesmo ao quadrado e dividido pela raiz quadrada de seu módulo resulta nele mesmo.
+x^2 - 14x + 48 = 0$8$Dica: O número é múltiplo de 4.
+x^2 -x = 28 + 2x$7$Dica: É um número primo.
+9y^2 - 12y + 4 = 0$2/3$Dica: O delta é igual a 0.
+5x^2 + 3x + 5 = 0$V$Dica: O delta é negativo.
+x^2 + 5x/2 - 3/2 = 0$1/2$Dica: É um número fracionário.
+3x^2 + 5x = - x - 9 + 2x^2$-3$A equação possui duas raízes reais iguais.
+x(x + 3) = 40$-8$Dica: O número é negativo.
+(x - 3)^2 = -2x^2$V$Dica: O delta é negativo.
+4x^2 + 9 = 12x$3/2$Dica: O número multiplicado por 2 resulta em um inteiro.
+4 + x(x - 4) = x$4$Dica: O número não é primo.
+3x^2 - 24x + 5 = -6x^2 - 11$4/3$Dica: O número é maior que 1 e menor que 2.
+10x^2 + 72x - 64 = 0$4/5$Dica: O número multiplicado por 5 resulta em um inteiro positivo.
+(x - 3)(x + 4) + 8 = x$-2$Dica: O número é negativo.
+8x^2 = 60 - 7x^2$3$Dica: O delta é positivo e o número também.
+2^2 - 90 = 8$-7$Dica: O número multiplicado ao quadrado e subitraído por ele mesmo resulta em 56.
+x(x - 3) - 2(x - 3) = 6$5$Dica: O número dividido por sua quinta parte resulta em um divisor de 100.
+Para que x = 1 seja raiz da equação 2ax^2 + (2a^2 - a - 4)x - (2 + a^2) = 0 Qual o valor que a deve assumir ?$-3$Dica: O número é negativo.
+Qual o valor de a para que a equação 4x^2 + ax + 9 = 0 tenha uma única solução e esta seja positiva?$12$Dica: O número é múltiplo de 4.
+Para qual valor de a, a equação (x - 2)(2ax - 3) + (x - 2)(-ax + 1) = 0 tenha duas raízes iguais?$1$Dica: O número é inteiro positivo.
+Qual o valor de P para que as raízes da equação x^2 - (P + 5)x = -36 sejam iguais?$-17$Dica: O número é ímpar e negativo.
+O quadrado de um número menos o seu triplo é igual a 40. Que número é esse?$8$Dica: O número é múltiplo de 2. 
+O quadrado de um número diminuído de 15 é igual ao seu dobro. Que número é esse?$-3$Dica: É um número negativo.
+O produto de 2 números ímpares positivos consegutivos é igual a 143. Qual o menor desses 2 números?$11$Dica: É um número primo.
+O produto de 2 números ímpares consecutivos excede a soma deles em 47 unidades. Qual o maior desses 2 números?$9$Dica: É positivo e não primo.
+Um azulejista usou 2000 azulejos quadrados e iguais para revestir 45m^2 de parede. Qual é a medida do lado de cada azulejo(em centímetros)?$15$Dica: 3 é um de seus divisores.

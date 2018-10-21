@@ -1,0 +1,40 @@
+x - 3 = 5$8$Dica: O número é par.
+x + 2 = 7$5$-Dica: O número é primo.
+x/3 + x/2 = 15$18$Dica: O número é par.
+x - 7 = -7$0$Dica: O número é par.
+x - 109 = 5$114$Dica: O número é par.
+15 = x + 1$14$Dica: O número é par.
+5(2x -4) = 7(x + 1) - 3$8$Dica: O número é par.
+5x + 6x – 16 = 3x + 2x - 4$2$Dica: O número é primo.
+4(x + 3) = 1$-11/4$Dica: O número é fracionário.
+x/5 = 2$10$Dica: O número é positivo.
+-3 = x + 10$-13$Dica:O número é negativo.
+0 = x + 12$-12$Dica: O número é negativo.
+3x − 7 = 2x + 5$12$Dica:  O número é par.
+7x + 8 = 4x − 10$-6$Dica: O número é negativo.
+4x − 15 = −2x + 3$3$Dica: O número é primo.
+2x − 4 − 8 = 4x$-6$Dica: O número é negativo.
+3x = x + 1 + 7$4$Dica: O número é par.
+7(x − 5) = 3(x + 1)$19/2$Dica: O número é fracionário.
+3(x − 2) = 4(−x + 3)$18/7$Dica: O número é fracionário.
+2(x + 1) − (x − 1) = 0$-3$Dica:  O número é negativo.
+5(x + 1) − 3(x + 2) = 0$1/2$Dica: O número é fracionário.
+13 + 4(x − 1) = 5(x + 2)$1/3$Dica: O número é fracionário.
+4(x + 5) + 3(x + 5) = 21$-2$Dica: O número é negativo.
+2(x + 5) − 3(5 − x) = 10$3$Dica: O número é primo.
+8(x − 1) = 8 − 4(2x − 3)$7/4$Dica: O número é fracionário.
+8x − 6 = 12$9/4$Dica: O número é fracionário.
+4x − 5 = 2x + 7$6$Dica:  O número é par.
+3− 5(2x − 5) = −2$3$Dica: O número é primo.
+−3(5x + 7) − 4 = −10x$-5$ Dica:  O número é negativo.
+8 + 3(x + 2) = 5(x −1)$19/2$Dica: O número é fracionário.
+5(x + 2) − 4(x +1) = 7$1$Dica:O número é ímpar.
+Determine um número real "x" para que as expressões (3x + 6)/ 8 e (2x + 10)/6 sejam iguais.$22$Dica:O número é par.
+O dobro de um número somado com 5 é igual a 91. Qual é esse número?$43$Dica: O número é primo.
+O triplo de um número diminuído de 4 é igual a 23.Qual é esse número?$9$Dica: O número é ímpar.
+O número somado com o seu dobro é igual a 150. Qual é esse número?$50$Dica: O número é par.
+Qual é o número que adicionado a 28 é o mesmo que 3 vezes esse número?$14$Dica: O número é par.
+O triplo de um número, menos 10 é igual ao próprio número mais 70. Qual é esse número ?$50$Dica: O número é par.
+Um número somado com sua metade é igual a 45. Qual é esse número ?$30$Dica:  O número é par.
+Um número somado com sua metade é igual a 15. Qual é esse número ?$10$Dica:  O número é par.
+Um número somado com sua quarta parte é igual 20. Qual é esse número ?$16$Dica: O número é par.
