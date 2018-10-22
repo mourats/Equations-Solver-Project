@@ -1,4 +1,4 @@
-module validador where
+module Validador where
 
 
 ehSinal :: Char -> Bool
