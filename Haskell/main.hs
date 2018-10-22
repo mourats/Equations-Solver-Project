@@ -166,6 +166,7 @@ start = do
             loop
     loop
 
+    
 main :: IO()
 main = do
     print (Read.randomValue 30)
