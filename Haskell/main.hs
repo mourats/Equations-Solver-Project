@@ -78,13 +78,15 @@ usuarioResponde = do
         putStrLn ("---- Modo equações do Primeiro Grau escolhido! ---- ")
         putStrLn ("As respostas são sempre um número. Exemplos: (2, 5, -9, 2/3)")
         -- Falta manipular a leitura com o split
-        putStrLn (Read.lerPrimeiroGrau)
+        let arq = Read.lerPrimeiroGrau
+        putStrLn (arq !! Read.randomValue (length arq))
         else if (operacao == "s") then do            
         putStrLn ("---- Modo equações do Segundo Grau escolhido! ---- ")
         putStrLn ("As respostas são sempre um número (2, 5, -9, 2/3) ou V")
         putStrLn ("V - Representa que o conjunto solução é vazio para o domínio dos Reais.")
         -- Falta manipular a leitura com o split
-        putStrLn (Read.lerSegundoGrau)
+        let arq = Read.lerSegundoGrau
+        putStrLn (arq !! Read.randomValue (length arq))
         else if (operacao == "e") then exitWith $ ExitFailure 3
         else do  
             putStrLn ("Opção inválida. Por favor tente novamente.")
@@ -154,7 +156,7 @@ start = do
 
         op <- getLine
         let operacao = lowerCase (op)
-    
+        
         if (operacao == "d") then computadorResponde 
         else if (operacao == "r") then usuarioResponde 
         else if (operacao == "e") then exitWith $ ExitFailure 3
@@ -166,5 +168,6 @@ start = do
 
 main :: IO()
 main = do
+    print (Read.randomValue 30)
     start
 
