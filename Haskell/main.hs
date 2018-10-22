@@ -1,4 +1,5 @@
 import qualified Read as Read
+import qualified Validador as Validador
 
 import System.Exit
 import Data.Char
@@ -116,9 +117,11 @@ computadorResponde = do
         if (equacao == "e") then exitWith $ ExitFailure 3 
         else if (equacao == "") then loopGetEquacao 
         else do
-            if (ehValidaaaaa equacao) -- if(ehValida equacao)
+            if (ehValida equacao) -- if(ehValida equacao)
             then do
                 let splitted = words equacao
+                let termosSomados = Validador.somarTermosComum splitted
+                Validador.calculaRaizes (termosSomados !! 0) (termosSomados !! 1) (termosSomados !! 2)
                 -- SE QUISER VERIFICAR COMO O ARRAY FICA USE print(splitted), O RESULTADO É ASSIM ["2x^2","+","4","=","0"]
                 --let simplificada = simplificar (splitted)
                 --resolverEquacao (simplificada)
@@ -130,11 +133,8 @@ computadorResponde = do
             
     loopGetEquacao
 
--- APAGAR ISSO QUANDO ARI COLOCAR A CERTA
-ehValidaaaaa :: String -> Bool
-ehValidaaaaa e
-    |e == "2x^2 + 4 = 0" = True
-    |otherwise = False
+
+
     
 
 start :: IO()
