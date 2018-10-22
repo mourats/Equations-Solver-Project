@@ -1,5 +1,6 @@
 module Validador where
 
+import Data.Char (isDigit)
 
 ehSinal :: Char -> Bool
 ehSinal x | x == '+' || x == '-' = True

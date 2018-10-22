@@ -117,11 +117,11 @@ computadorResponde = do
         if (equacao == "e") then exitWith $ ExitFailure 3 
         else if (equacao == "") then loopGetEquacao 
         else do
-            if (ehValida equacao) -- if(ehValida equacao)
+            if (Validador.ehValida equacao) -- if(ehValida equacao)
             then do
                 let splitted = words equacao
                 let termosSomados = Validador.somarTermosComum splitted
-                Validador.calculaRaizes (termosSomados !! 0) (termosSomados !! 1) (termosSomados !! 2)
+                calculaRaizes (termosSomados !! 0) (termosSomados !! 1) (termosSomados !! 2)
                 -- SE QUISER VERIFICAR COMO O ARRAY FICA USE print(splitted), O RESULTADO É ASSIM ["2x^2","+","4","=","0"]
                 --let simplificada = simplificar (splitted)
                 --resolverEquacao (simplificada)
