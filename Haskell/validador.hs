@@ -1,4 +1,4 @@
-export validacao where
+export validador where
 
 
 ehSinal :: Char -> Bool
