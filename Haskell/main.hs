@@ -61,9 +61,6 @@ calculaRaizes a b c = do
             putStrLn ("Como o delta ("++ (show $ delta) ++") da quação possui duas soluções distintas. São elas: " ++ (show $ x1) ++ " e " ++ (show $ x2))
             
 
-
-
-
 usuarioResponde :: IO()
 usuarioResponde = do
 
@@ -80,12 +77,14 @@ usuarioResponde = do
         if (operacao == "p") then do
         putStrLn ("---- Modo equações do Primeiro Grau escolhido! ---- ")
         putStrLn ("As respostas são sempre um número. Exemplos: (2, 5, -9, 2/3)")
-            -- Leitura do arquivo first-degree-equations-bd.txt
+        -- Falta manipular a leitura com o split
+        putStrLn (Read.lerPrimeiroGrau)
         else if (operacao == "s") then do            
         putStrLn ("---- Modo equações do Segundo Grau escolhido! ---- ")
         putStrLn ("As respostas são sempre um número (2, 5, -9, 2/3) ou V")
         putStrLn ("V - Representa que o conjunto solução é vazio para o domínio dos Reais.")
-            -- Leitura do arquivo second-degree-equations-bd.txt
+        -- Falta manipular a leitura com o split
+        putStrLn (Read.lerSegundoGrau)
         else if (operacao == "e") then exitWith $ ExitFailure 3
         else do  
             putStrLn ("Opção inválida. Por favor tente novamente.")
@@ -139,10 +138,7 @@ ehValidaaaaa e
 start :: IO()
 start = do
 
-    let logomarca = do
-        logo <- readFile "data/logomarca.txt"
-        putStrLn (logo)
-    logomarca
+    putStr (Read.logomarca)
 
     putStrLn ("")
     putStrLn ("===========================================================================================")
