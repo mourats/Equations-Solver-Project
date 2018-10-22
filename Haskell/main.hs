@@ -15,7 +15,7 @@ instrucoes = do
     putStrLn ("1) A variável usada deve ser sempre x;");
 	putStrLn ("2) É necessário que os termos sejam separados por espaço e os sinais também.");
     putStrLn ("");
- 	putStrLn ("Exemplos de expressões VÁLIDAS:");
+    putStrLn ("Exemplos de expressões VÁLIDAS:");
     putStrLn ("");
 	putStrLn ("a) x * x = 4");
 	putStrLn ("b) x^2 / 1 = 9");
@@ -23,7 +23,7 @@ instrucoes = do
 	putStrLn ("d) x^2 + 5x / 2 - 3 / 2 = 0");
 
     putStrLn ("");
- 	putStrLn ("Exemplos de expressões INVÁLIDAS:");
+    putStrLn ("Exemplos de expressões INVÁLIDAS:");
     putStrLn ("");
 	putStrLn ("a) 2y^2 - 8 = 0 - Não é aceito outra variável que não seja x.");
 	putStrLn ("d) x^2 + 5x/2 - 3/2 = 0 - É necessário ter espaços entre o termo e o /.");
