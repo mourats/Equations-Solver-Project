@@ -1,4 +1,5 @@
-import Read as Read
+import qualified Read as Read
+
 import System.Exit
 import Data.Char
 import Control.Monad
