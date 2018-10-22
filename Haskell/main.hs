@@ -1,5 +1,5 @@
 import qualified Read as Read
-import qualified validador as validador
+import qualified Validador as Validador
 
 import System.Exit
 import Data.Char
@@ -118,8 +118,8 @@ computadorResponde = do
             if (ehValida equacao) -- if(ehValida equacao)
             then do
                 let splitted = words equacao
-                let termosSomados = validador.somarTermosComum splitted
-                validador.calculaRaizes (termosSomados !! 0) (termosSomados !! 1) (termosSomados !! 2)
+                let termosSomados = Validador.somarTermosComum splitted
+                Validador.calculaRaizes (termosSomados !! 0) (termosSomados !! 1) (termosSomados !! 2)
                 -- SE QUISER VERIFICAR COMO O ARRAY FICA USE print(splitted), O RESULTADO É ASSIM ["2x^2","+","4","=","0"]
                 --let simplificada = simplificar (splitted)
                 --resolverEquacao (simplificada)
