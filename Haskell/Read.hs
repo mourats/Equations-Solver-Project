@@ -2,7 +2,6 @@ module Read where
 
 import System.Random
 import System.IO.Unsafe(unsafeDupablePerformIO)
-import Data.List.Split
 
 randomValue :: Int -> Int
 randomValue tam = unsafeDupablePerformIO (getStdRandom (randomR (0,tam - 1))) 
