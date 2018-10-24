@@ -3,38 +3,42 @@ module Validador where
 import Data.Char (isDigit)
 
 ehSinal :: Char -> Bool
-ehSinal x | x == '+' || x == '-' = True
-          | otherwise = False
-
+ehSinal x 
+    | x == '+' || x == '-' || x == '*' || x == '/' = True
+    | otherwise = False
+          
 ehEstadoFinal :: String -> Bool
-ehEstadoFinal estado | estado == "DIGITO" || estado == "X" || estado == "EXPOENTE" = True
-                     | otherwise = False
+ehEstadoFinal estado 
+    | estado == "DIGITO" || estado == "X" || estado == "EXPOENTE" || estado == "ESPACO" = True
+    | otherwise = False
     
 ehValida :: String -> Bool
-ehValida equacao = validarEquacao "INICIAL" equacao
-
-validarEquacao :: String -> String -> Bool
-validarEquacao estado equacao | null equacao && ehEstadoFinal estado = True
-                             | estado == "INICIAL" && head equacao == 'x' = validarEquacao "X" (tail equacao)
-                             | estado == "INICIAL" && isDigit (head equacao) =  validarEquacao "DIGITO" (tail equacao)
-                             | estado == "INICIAL" && ehSinal (head equacao) = validarEquacao "SINAL" (tail equacao)
-                             | estado == "INICIAL" && head equacao == ' ' = validarEquacao "INICIAL" (tail equacao)
-                             | estado == "X" && head equacao == '^' = validarEquacao "^" (tail equacao)
-                             | estado == "X" && head equacao == ' ' = validarEquacao "ESPACO" (tail equacao)
-                             | estado == "DIGITO" && head equacao == ' ' = validarEquacao "ESPACO" (tail equacao)
-                             | estado ==  "DIGITO" && head equacao == 'x' = validarEquacao "X" (tail equacao)
-                             | estado == "DIGITO" && isDigit (head equacao) = validarEquacao "DIGITO" (tail equacao)
-                             | estado == "^" && isDigit (head equacao) = validarEquacao "EXPOENTE" (tail equacao)
-                             | estado == "EXPOENTE" && isDigit (head equacao) = validarEquacao "EXPOENTE" (tail equacao)
-                             | estado == "EXPOENTE" && head equacao == ' ' = validarEquacao "ESPACO" (tail equacao)
-                             | estado == "ESPACO" && ehSinal (head equacao) = validarEquacao "SINAL" (tail equacao)
-                             | estado == "ESPACO" && head equacao == ' ' = validarEquacao "ESPACO" (tail equacao)
-                             | estado == "ESPACO" && head equacao == '=' = validarEquacao "IGUAL" (tail equacao)
-                             | estado == "SINAL" && head equacao == ' ' = validarEquacao "ESPACO_SINAL" (tail equacao)
-                             | estado == "ESPACO_SINAL" && head equacao == 'x' = validarEquacao "X" (tail equacao)
-                             | estado == "ESPACO_SINAL" && isDigit (head equacao) = validarEquacao "DIGITO" (tail equacao)
-                             | estado == "IGUAL" && head equacao == ' ' = validarEquacao "INICIAL" (tail equacao)
-                             | otherwise = False
+ehValida equacao = validarEquacao "INICIAL" equacao 0
+validarEquacao :: String -> String -> Int -> Bool
+validarEquacao estado equacao qtdIgual
+    | null equacao && ehEstadoFinal estado && qtdIgual == 1 = True
+    | null equacao || qtdIgual > 1 = False
+    | estado == "INICIAL" && head equacao == 'x' = validarEquacao "X" (tail equacao) qtdIgual 
+    | estado == "INICIAL" && isDigit (head equacao) =  validarEquacao "DIGITO" (tail equacao) qtdIgual 
+    | estado == "INICIAL" && ehSinal (head equacao) = validarEquacao "SINAL" (tail equacao) qtdIgual 
+    | estado == "INICIAL" && head equacao == ' ' = validarEquacao "INICIAL" (tail equacao) qtdIgual 
+    | estado == "X" && head equacao == '^' = validarEquacao "^" (tail equacao) qtdIgual 
+    | estado == "X" && head equacao == ' ' = validarEquacao "ESPACO" (tail equacao) qtdIgual 
+    | estado == "DIGITO" && head equacao == ' ' = validarEquacao "ESPACO" (tail equacao) qtdIgual
+    | estado ==  "DIGITO" && head equacao == 'x' = validarEquacao "X" (tail equacao) qtdIgual
+    | estado == "DIGITO" && isDigit (head equacao) = validarEquacao "DIGITO" (tail equacao) qtdIgual
+    | estado == "^" && isDigit (head equacao) = validarEquacao "EXPOENTE" (tail equacao) qtdIgual
+    | estado == "EXPOENTE" && isDigit (head equacao) = validarEquacao "EXPOENTE" (tail equacao) qtdIgual
+    | estado == "EXPOENTE" && head equacao == ' ' = validarEquacao "ESPACO" (tail equacao) qtdIgual
+    | estado == "ESPACO" && ehSinal (head equacao) = validarEquacao "SINAL" (tail equacao) qtdIgual
+    | estado == "ESPACO" && head equacao == ' ' = validarEquacao "ESPACO" (tail equacao) qtdIgual
+    | estado == "ESPACO" && head equacao == '=' = validarEquacao "IGUAL" (tail equacao) (qtdIgual + 1)
+    | estado == "SINAL" && head equacao == ' ' = validarEquacao "ESPACO_SINAL" (tail equacao) qtdIgual
+    | estado == "ESPACO_SINAL" && head equacao == 'x' = validarEquacao "X" (tail equacao) qtdIgual
+    | estado == "ESPACO_SINAL" && isDigit (head equacao) = validarEquacao "DIGITO" (tail equacao) qtdIgual
+    | estado == "ESPACO_SINAL" && head equacao == ' ' = validarEquacao "ESPACO_SINAL" (tail equacao) qtdIgual
+    | estado == "IGUAL" && head equacao == ' ' = validarEquacao "INICIAL" (tail equacao) qtdIgual
+    | otherwise = False
 
 getGrauTermo :: String -> Int
 getGrauTermo x  = read (getGrauTermoAux x True False "") :: Int
