@@ -14,6 +14,7 @@ ehEstadoFinal estado
     
 ehValida :: String -> Bool
 ehValida equacao = validarEquacao "INICIAL" equacao 0
+
 validarEquacao :: String -> String -> Int -> Bool
 validarEquacao estado equacao qtdIgual
     | null equacao && ehEstadoFinal estado && qtdIgual == 1 = True
