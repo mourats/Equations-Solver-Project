@@ -11,7 +11,7 @@ ehEstadoFinal estado | estado == "DIGITO" || estado == "X" || estado == "EXPOENT
                      | otherwise = False
     
 ehValida :: String -> Bool
-ehValida equacao = validarEquacao equacao "INICIAL"
+ehValida equacao = validarEquacao "INICIAL" equacao
 
 validarEquacao :: String -> String -> Bool
 validarEquacao estado equacao | null equacao && ehEstadoFinal estado = True
