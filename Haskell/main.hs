@@ -6,6 +6,7 @@ import Data.Char
 import Control.Monad
 import System.Console.ANSI
 import Control.Concurrent
+import Data.List.Split
 
 
 lowerCase :: String -> String
@@ -76,6 +77,37 @@ calculaRaizes a b c = do
             putStrLn ("Como o delta ("++ (show $ delta) ++") da quação possui duas soluções distintas. São elas: " ++ (show $ x1) ++ " e " ++ (show $ x2))
             
 
+
+leituraEscolhida :: String -> [String]
+leituraEscolhida op
+    | op == "s" = Read.lerSegundoGrau
+    | otherwise = Read.lerPrimeiroGrau
+
+respondendo :: [String] -> IO()
+respondendo lista = do
+    putStrLn (lista !! 0)
+    let index = Read.randomValue (length lista)
+    let equacao = (splitOn "$" (lista !! index)) !! 0
+    let result = (splitOn "$" (lista !! index)) !! 1
+    let dica = (splitOn "$" (lista !! index)) !! 2
+    putStrLn ("")
+    putStrLn (equacao)
+    putStrLn (dica)
+    putStrLn ("Digite sua resposta")
+    let resposta = do
+        resp <- getLine
+        if (resp == "e") then exitWith $ ExitFailure 3
+        else
+            if (result == resp) then 
+                putStrLn ("ACERTOU!!")
+            else
+                putStrLn ("ERROU! :(");
+                putStrLn ("A resposta certa: ");
+                putStrLn (result);
+    resposta
+    respondendo [a | a <- lista, not (a == (lista !! index))]
+
+
 usuarioResponde :: IO()
 usuarioResponde = do
 
@@ -92,52 +124,15 @@ usuarioResponde = do
         let operacao = lowerCase (op)
     
         mode operacao
-        if (operacao == "p") then do
-            let primeiroGrau = do
-                putStrLn ("Equação:")
-                -- Falta manipular a leitura com o split
-                let arq = Read.lerPrimeiroGrau
-                putStrLn (arq !! Read.randomValue (length arq))
-                putStrLn ("")
-                putStrLn ("Digite sua resposta")
-                let resposta = do
-                    resp <- getLine
-                    if (resp == "e") then exitWith $ ExitFailure 3
-                    else
-                        -- compara as respostas
-                        -- diz se acertou ou errou
-                        putStrLn ("");
-                resposta
-                threadDelay 1050000
-                primeiroGrau
-            primeiroGrau
+        let arq = leituraEscolhida operacao
 
-        else if (operacao == "s") then do
-            let segundoGrau = do
-                putStrLn ("Equação:")
-                -- Falta manipular a leitura com o split
-                let arq = Read.lerSegundoGrau
-                putStrLn (arq !! Read.randomValue (length arq))
-                putStrLn ("")
-                putStrLn ("Digite sua resposta")
-                let resposta = do
-                    resp <- getLine
-                    if (resp == "e") then exitWith $ ExitFailure 3
-                    else
-                        -- compara as respostas
-                        -- diz se acertou ou errou
-                        putStrLn ("");
-                resposta
-                threadDelay 1050000
-                segundoGrau
-            segundoGrau            
-        else if (operacao == "e") then exitWith $ ExitFailure 3
-        else do  
+        if (operacao == "e") then exitWith $ ExitFailure 3
+        else if (operacao /= "s" && operacao /= "p") then do
             putStrLn ("Opção inválida. Por favor tente novamente.") 
             loop
+            else
+                respondendo arq
     loop
-
-    -- Leitura e exibição linha por linha
 
 computadorResponde :: IO()
 computadorResponde = do
