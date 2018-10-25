@@ -124,13 +124,13 @@ usuarioResponde = do
         let operacao = lowerCase (op)
     
         mode operacao
-        let arq = leituraEscolhida operacao
-
+        
         if (operacao == "e") then exitWith $ ExitFailure 3
         else if (operacao /= "s" && operacao /= "p") then do
             putStrLn ("Opção inválida. Por favor tente novamente.") 
             loop
             else
+                let arq = leituraEscolhida operacao
                 respondendo arq
     loop
 
