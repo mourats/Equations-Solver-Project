@@ -1,5 +1,5 @@
-x - 3 = 5$8$Dica: O número é par.
-x + 2 = 7$5$-Dica: O número é primo.
+﻿x - 3 = 5$8$Dica: O número é par.
+x + 2 = 7$5$Dica: O número é primo.
 x/3 + x/2 = 15$18$Dica: O número é par.
 x - 7 = -7$0$Dica: O número é par.
 x - 109 = 5$114$Dica: O número é par.
@@ -26,7 +26,7 @@ x/5 = 2$10$Dica: O número é positivo.
 8x − 6 = 12$9/4$Dica: O número é fracionário.
 4x − 5 = 2x + 7$6$Dica:  O número é par.
 3− 5(2x − 5) = −2$3$Dica: O número é primo.
-−3(5x + 7) − 4 = −10x$-5$ Dica:  O número é negativo.
+−3(5x + 7) − 4 = −10x$-5$Dica:  O número é negativo.
 8 + 3(x + 2) = 5(x −1)$19/2$Dica: O número é fracionário.
 5(x + 2) − 4(x +1) = 7$1$Dica:O número é ímpar.
 Determine um número real "x" para que as expressões (3x + 6)/ 8 e (2x + 10)/6 sejam iguais.$22$Dica:O número é par.

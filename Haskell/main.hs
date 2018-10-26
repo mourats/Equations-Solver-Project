@@ -1,6 +1,7 @@
 import qualified Read as Read
 import qualified Validador as Validador
 
+import System.IO.Unsafe(unsafeDupablePerformIO)
 import System.Exit
 import Data.Char
 import Control.Monad
@@ -11,6 +12,7 @@ import Data.List.Split
 
 lowerCase :: String -> String
 lowerCase palavra = map toLower (palavra)
+
 
 instrucoes :: IO()
 instrucoes = do
@@ -34,6 +36,7 @@ instrucoes = do
 	putStrLn ("e) 3x^2 - 24x + 5 = -6x^2 - 11 -É necessário ter espaço entre o - e o 6.");
     putStrLn ("");
 
+
 mode :: String -> IO()
 mode opc = do
     if (opc == "p")
@@ -48,6 +51,7 @@ mode opc = do
         putStrLn ("")
     else putStr ("")
     
+
 solucaoLinear :: Int -> Int -> IO()
 solucaoLinear a b = do  
 
@@ -77,27 +81,31 @@ calculaRaizes a b c = do
             putStrLn ("Como o delta ("++ (show $ delta) ++") da quação possui duas soluções distintas. São elas: " ++ (show $ x1) ++ " e " ++ (show $ x2))
             
 
-removeElemento:: [String] -> Int -> [String]
-removeElemento termos index = 
-    let (ys, zs) = splitAt index termos in ys ++ (tail zs)
+--removeElemento:: [String] -> Int -> [String]
+--removeElemento termos index = [x | x <- termos, x /= (termos !! index)]
+--    let (ys, zs) = splitAt index termos in ys ++ (tail zs)
 
-leituraEscolhida :: String -> [String]
-leituraEscolhida op
-    | op == "s" = Read.lerSegundoGrau
-    | otherwise = Read.lerPrimeiroGrau
 
-respondendo :: [String] -> IO()
-respondendo lista = do
-    --putStrLn (lista !! 0)
-    let index = Read.randomValue (length lista)
-    let equacao = (splitOn "$" (lista !! index)) !! 0
-    let result = (splitOn "$" (lista !! index)) !! 1
-    let dica = (splitOn "$" (lista !! index)) !! 2
+respondendo :: String -> Int -> IO()
+respondendo arq tam = do
+
+    let index = Read.randomValue (tam)
+    let nomeArquivo = if (arq == "p") then "data/first-degree-equations-bd.txt" else "data/second-degree-equations-bd.txt"
+
+    let file = unsafeDupablePerformIO (readFile nomeArquivo)
+    let lista =  lines file
+    let linha = (lista !! index)
+    
+    let equacao = (splitOn "$" (linha)) !! 0
+    let result = (splitOn "$" (linha)) !! 1
+    let dica = (splitOn "$" (linha)) !! 2
+
     putStrLn ("")
+    putStrLn ("Problema:")
     putStrLn (equacao)
     putStrLn (dica)
     putStrLn ("")
-    putStrLn ("Digite sua resposta")
+    putStrLn ("Digite sua resposta:")
     let resposta = do
         resp <- getLine
         if (resp == "e") then exitWith $ ExitFailure 3
@@ -109,7 +117,7 @@ respondendo lista = do
                 putStrLn ("A resposta certa é: ");
                 putStrLn (result);
     resposta
-    respondendo (removeElemento lista index)
+    respondendo arq tam
 
 
 usuarioResponde :: IO()
@@ -127,16 +135,15 @@ usuarioResponde = do
         op <- getLine
         let operacao = lowerCase (op)
         
-        mode operacao
-        let arq = leituraEscolhida operacao
-        
+        mode operacao        
         if (operacao == "e") then exitWith $ ExitFailure 3
         else if (operacao /= "s" && operacao /= "p") then do
             putStrLn ("Opção inválida. Por favor tente novamente.") 
             loop
             else
-                respondendo arq
+                respondendo operacao 40
     loop
+
 
 computadorResponde :: IO()
 computadorResponde = do
@@ -173,9 +180,6 @@ computadorResponde = do
                 loopGetEquacao
             
     loopGetEquacao
-
-
-
     
 
 start :: IO()
