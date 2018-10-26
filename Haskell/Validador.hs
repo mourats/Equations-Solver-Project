@@ -85,7 +85,7 @@ somarTermosComumAux termos i igual a b c
           proxI = i + 1
           antI = i - 1
           negativo = i > 0 && xor ((termos !! antI) !! 0 == '-') igual
-          grau = getGrauTermo (termos !! i
+          grau = getGrauTermo (termos !! i)
                  
 simplificar :: [String] -> [String]
 simplificar termos = simplificarAux termos 1
