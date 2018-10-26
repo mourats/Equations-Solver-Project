@@ -39,19 +39,17 @@ instrucoes = do
 
 mode :: String -> IO()
 mode opc = do
-    if (opc == "p")
-    then putStrLn ("======================== Modo equações do Primeiro Grau escolhido! ========================")
-    else if (opc == "s") then putStrLn ("========================= Modo equações do Segundo Grau escolhido! ========================")
-    else putStr ("")
-    if (opc == "p" || opc == "s") then do
+    if (opc == "p") then do 
+        putStrLn ("======================== Modo equações do Primeiro Grau escolhido! ========================")
         putStrLn ("")
-        putStrLn ("Atenção:")
-        if (opc == "p") then putStrLn ("As respostas são sempre um número (2, 5, -9, 2/3)") 
-        else if (opc == "s") then putStrLn ("As respostas são sempre um número (2, 5, -9, 2/3) ou V") else putStr ("")
-        if (opc == "s") then putStrLn ("V - Representa que o conjunto solução é vazio para o domínio dos Reais.") else putStr ("")
+        putStrLn ("=====Atenção:=====")
+        putStrLn ("As respostas são sempre um número. Exemplos: (2, 5, -9, 2/3)") 
+    else do 
+        putStrLn ("========================= Modo equações do Segundo Grau escolhido! ========================")
         putStrLn ("")
-    else putStr ("")
-    
+        putStrLn ("=====Atenção:=====")
+        putStrLn ("As respostas são sempre um número (2, 5, -9, 2/3) ou V") 
+        putStrLn ("V - Representa que o conjunto solução é vazio para o domínio dos Reais.")
 
 solucaoLinear :: Int -> Int -> IO()
 solucaoLinear a b = do  
