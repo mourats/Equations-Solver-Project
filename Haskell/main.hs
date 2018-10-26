@@ -46,8 +46,9 @@ mode opc = do
     if (opc == "p" || opc == "s") then do
         putStrLn ("")
         putStrLn ("Atenção:")
-        putStrLn ("As respostas são sempre um número (2, 5, -9, 2/3) ou V")
-        putStrLn ("V - Representa que o conjunto solução é vazio para o domínio dos Reais.")
+        if (opc == "p") then putStrLn ("As respostas são sempre um número (2, 5, -9, 2/3)") 
+        else if (opc == "s") then putStrLn ("As respostas são sempre um número (2, 5, -9, 2/3) ou V") else putStr ("")
+        if (opc == "s") then putStrLn ("V - Representa que o conjunto solução é vazio para o domínio dos Reais.") else putStr ("")
         putStrLn ("")
     else putStr ("")
     
