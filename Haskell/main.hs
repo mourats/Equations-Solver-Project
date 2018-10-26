@@ -77,6 +77,9 @@ calculaRaizes a b c = do
             putStrLn ("Como o delta ("++ (show $ delta) ++") da quação possui duas soluções distintas. São elas: " ++ (show $ x1) ++ " e " ++ (show $ x2))
             
 
+removeElemento:: [String] -> Int -> [String]
+removeElemento termos index = 
+    let (ys, zs) = splitAt index termos in ys ++ (tail zs)
 
 leituraEscolhida :: String -> [String]
 leituraEscolhida op
@@ -105,7 +108,7 @@ respondendo lista = do
                 putStrLn ("A resposta certa: ");
                 putStrLn (result);
     resposta
-    respondendo [a | a <- lista, not (a == (lista !! index))]
+    respondendo (removeElemento lista index)
 
 
 usuarioResponde :: IO()
@@ -124,13 +127,13 @@ usuarioResponde = do
         let operacao = lowerCase (op)
     
         mode operacao
+        let arq = leituraEscolhida operacao
         
         if (operacao == "e") then exitWith $ ExitFailure 3
         else if (operacao /= "s" && operacao /= "p") then do
             putStrLn ("Opção inválida. Por favor tente novamente.") 
             loop
             else
-                let arq = leituraEscolhida operacao
                 respondendo arq
     loop
 
