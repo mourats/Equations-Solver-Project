@@ -1,4 +1,4 @@
-import qualified Read as Read
+import qualified Util as Util
 import qualified Validador as Validador
 
 import System.IO.Unsafe(unsafeDupablePerformIO)
@@ -9,10 +9,8 @@ import System.Console.ANSI
 import Control.Concurrent
 import Data.List.Split
 
-
 lowerCase :: String -> String
 lowerCase palavra = map toLower (palavra)
-
 
 instrucoes :: IO()
 instrucoes = do
@@ -57,9 +55,7 @@ solucaoLinear a b = do
     if (a == 0) then putStrLn("A equação é linear porém a operação - b/a, gera uma divisão por zero, não possuindo solução.")
     else do
         let  x = fromIntegral((-1) * b) / fromIntegral(a)
-
-        putStrLn("A equação é linear e a sua solução é x = " ++ (show $ x))
-
+        putStrLn("A equação é linear e a sua soluçãao é x = " ++ (show $ x))
 
 calculaRaizes :: Int -> Int -> Int -> IO()
 calculaRaizes a b c = do
@@ -80,15 +76,10 @@ calculaRaizes a b c = do
             putStrLn ("Como o delta ("++ (show $ delta) ++") da quação possui duas soluções distintas. São elas: " ++ (show $ x1) ++ " e " ++ (show $ x2))
             
 
---removeElemento:: [String] -> Int -> [String]
---removeElemento termos index = [x | x <- termos, x /= (termos !! index)]
---    let (ys, zs) = splitAt index termos in ys ++ (tail zs)
-
-
 respondendo :: String -> Int -> IO()
 respondendo arq tam = do
 
-    let index = Read.randomValue (tam)
+    let index = Util.randomValue (tam)
     let nomeArquivo = if (arq == "p") then "data/first-degree-equations-bd.txt" else "data/second-degree-equations-bd.txt"
 
     let file = unsafeDupablePerformIO (readFile nomeArquivo)
@@ -169,22 +160,20 @@ computadorResponde = do
                 let splitted = words equacao
                 let termosSomados = Validador.somarTermosComum splitted
                 calculaRaizes (termosSomados !! 0) (termosSomados !! 1) (termosSomados !! 2)
-                -- SE QUISER VERIFICAR COMO O ARRAY FICA USE print(splitted), O RESULTADO É ASSIM ["2x^2","+","4","=","0"]
-                --let simplificada = simplificar (splitted)
-                --resolverEquacao (simplificada)
                 putStr ("")
             else do
                 putStrLn ("Equação inválida!")
                 putStrLn ("")
                 loopGetEquacao
-            
+        putStrLn ("")
+        loopGetEquacao
     loopGetEquacao
     
 
 start :: IO()
 start = do
 
-    putStr (Read.logomarca)
+    putStr (Util.logomarca)
 
     let loop = do
         putStrLn ("")
@@ -215,6 +204,6 @@ start = do
     
 main :: IO()
 main = do
-    print (Read.randomValue 30)
+    print (Util.randomValue 30)
     start
 
