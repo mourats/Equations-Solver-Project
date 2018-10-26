@@ -85,4 +85,39 @@ somarTermosComumAux termos i igual a b c
           proxI = i + 1
           antI = i - 1
           negativo = i > 0 && xor ((termos !! antI) !! 0 == '-') igual
-          grau = getGrauTermo (termos !! i)
+          grau = getGrauTermo (termos !! i
+                 
+simplificar :: [String] -> [String]
+simplificar termos = simplificarAux termos 1
+
+simplificarAux :: [String] -> Int -> [String]
+simplificarAux termos i
+    | i == (length termos - 1) = termos
+    | ehMultiplicacao = simplificarAux trocaAuxMult2 (i + 1)
+    | ehDivisao = simplificarAux trocaAuxDiv2 (i + 1)
+    | otherwise = simplificarAux termos (i + 1)
+    where
+        ehMultiplicacao = (termos !! i) !! 0 == '*'
+        ehDivisao = (termos !! i) !! 0 == '/'
+        termo1 = termos !! (i - 1)
+        termo2 = termos !! (i + 1)
+        grauTermo1 = getGrauTermo termo1
+        grauTermo2 = getGrauTermo termo2
+        constanteTermo1 = getConstante termo1
+        constanteTermo2 = getConstante termo2
+        novoGrauMult = grauTermo1 + grauTermo2
+        novaConstanteMult = constanteTermo1 * constanteTermo2
+        novoElementoMult = show novaConstanteMult ++ "^" ++ show novoGrauDiv
+        novoGrauDiv = grauTermo1 - grauTermo2
+        novaConstanteDiv = constanteTermo1 `div` constanteTermo2
+        novoElementoDiv = show novaConstanteDiv ++ "^" ++ show novoGrauDiv
+        trocaAuxMult = changeNth termos (i - 1) novoElementoMult
+        trocaAuxMult1 = changeNth trocaAuxMult i "+"
+        trocaAuxMult2 = changeNth trocaAuxMult1 (i + 1) "0"
+        trocaAuxDiv = changeNth termos (i - 1) novoElementoDiv
+        trocaAuxDiv1 = changeNth trocaAuxDiv i "+"
+        trocaAuxDiv2 = changeNth trocaAuxDiv1 (i + 1) "0"
+
+changeNth :: [String] -> Int -> String -> [String]
+changeNth termos index novoTermo = 
+    let (ys, zs) = splitAt index termos in ys ++ [novoTermo] ++ (tail zs)
