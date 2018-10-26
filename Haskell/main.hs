@@ -85,7 +85,7 @@ leituraEscolhida op
 
 respondendo :: [String] -> IO()
 respondendo lista = do
-    putStrLn (lista !! 0)
+    --putStrLn (lista !! 0)
     let index = Read.randomValue (length lista)
     let equacao = (splitOn "$" (lista !! index)) !! 0
     let result = (splitOn "$" (lista !! index)) !! 1
@@ -93,6 +93,7 @@ respondendo lista = do
     putStrLn ("")
     putStrLn (equacao)
     putStrLn (dica)
+    putStrLn ("")
     putStrLn ("Digite sua resposta")
     let resposta = do
         resp <- getLine
@@ -100,9 +101,9 @@ respondendo lista = do
         else
             if (result == resp) then 
                 putStrLn ("ACERTOU!!")
-            else
+            else do
                 putStrLn ("ERROU! :(");
-                putStrLn ("A resposta certa: ");
+                putStrLn ("A resposta certa é: ");
                 putStrLn (result);
     resposta
     respondendo [a | a <- lista, not (a == (lista !! index))]
@@ -122,15 +123,15 @@ usuarioResponde = do
 
         op <- getLine
         let operacao = lowerCase (op)
-    
+        
         mode operacao
+        let arq = leituraEscolhida operacao
         
         if (operacao == "e") then exitWith $ ExitFailure 3
         else if (operacao /= "s" && operacao /= "p") then do
             putStrLn ("Opção inválida. Por favor tente novamente.") 
             loop
             else
-                let arq = leituraEscolhida operacao
                 respondendo arq
     loop
 
