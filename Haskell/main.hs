@@ -1,15 +1,18 @@
 import qualified Read as Read
 import qualified Validador as Validador
 
+import System.IO.Unsafe(unsafeDupablePerformIO)
 import System.Exit
 import Data.Char
 import Control.Monad
 import System.Console.ANSI
 import Control.Concurrent
+import Data.List.Split
 
 
 lowerCase :: String -> String
 lowerCase palavra = map toLower (palavra)
+
 
 instrucoes :: IO()
 instrucoes = do
@@ -33,20 +36,21 @@ instrucoes = do
 	putStrLn ("e) 3x^2 - 24x + 5 = -6x^2 - 11 -É necessário ter espaço entre o - e o 6.");
     putStrLn ("");
 
+
 mode :: String -> IO()
 mode opc = do
-    if (opc == "p")
-    then putStrLn ("======================== Modo equações do Primeiro Grau escolhido! ========================")
-    else if (opc == "s") then putStrLn ("========================= Modo equações do Segundo Grau escolhido! ========================")
-    else putStr ("")
-    if (opc == "p" || opc == "s") then do
+    if (opc == "p") then do 
+        putStrLn ("======================== Modo equações do Primeiro Grau escolhido! ========================")
         putStrLn ("")
-        putStrLn ("Atenção:")
-        putStrLn ("As respostas são sempre um número (2, 5, -9, 2/3) ou V")
+        putStrLn ("=====Atenção:=====")
+        putStrLn ("As respostas são sempre um número. Exemplos: (2, 5, -9, 2/3)") 
+    else do 
+        putStrLn ("========================= Modo equações do Segundo Grau escolhido! ========================")
+        putStrLn ("")
+        putStrLn ("=====Atenção:=====")
+        putStrLn ("As respostas são sempre um número (2, 5, -9, 2/3) ou V") 
         putStrLn ("V - Representa que o conjunto solução é vazio para o domínio dos Reais.")
-        putStrLn ("")
-    else putStr ("")
-    
+
 solucaoLinear :: Int -> Int -> IO()
 solucaoLinear a b = do  
 
@@ -76,6 +80,45 @@ calculaRaizes a b c = do
             putStrLn ("Como o delta ("++ (show $ delta) ++") da quação possui duas soluções distintas. São elas: " ++ (show $ x1) ++ " e " ++ (show $ x2))
             
 
+--removeElemento:: [String] -> Int -> [String]
+--removeElemento termos index = [x | x <- termos, x /= (termos !! index)]
+--    let (ys, zs) = splitAt index termos in ys ++ (tail zs)
+
+
+respondendo :: String -> Int -> IO()
+respondendo arq tam = do
+
+    let index = Read.randomValue (tam)
+    let nomeArquivo = if (arq == "p") then "data/first-degree-equations-bd.txt" else "data/second-degree-equations-bd.txt"
+
+    let file = unsafeDupablePerformIO (readFile nomeArquivo)
+    let lista =  lines file
+    let linha = (lista !! index)
+    
+    let equacao = (splitOn "$" (linha)) !! 0
+    let result = (splitOn "$" (linha)) !! 1
+    let dica = (splitOn "$" (linha)) !! 2
+
+    putStrLn ("")
+    putStrLn ("Problema:")
+    putStrLn (equacao)
+    putStrLn (dica)
+    putStrLn ("")
+    putStrLn ("Digite sua resposta:")
+    let resposta = do
+        resp <- getLine
+        if (resp == "e") then exitWith $ ExitFailure 3
+        else
+            if (result == resp) then 
+                putStrLn ("ACERTOU!!")
+            else do
+                putStrLn ("ERROU! :(");
+                putStrLn ("A resposta certa é: ");
+                putStrLn (result);
+    resposta
+    respondendo arq tam
+
+
 usuarioResponde :: IO()
 usuarioResponde = do
 
@@ -90,54 +133,16 @@ usuarioResponde = do
 
         op <- getLine
         let operacao = lowerCase (op)
-    
-        mode operacao
-        if (operacao == "p") then do
-            let primeiroGrau = do
-                putStrLn ("Equação:")
-                -- Falta manipular a leitura com o split
-                let arq = Read.lerPrimeiroGrau
-                putStrLn (arq !! Read.randomValue (length arq))
-                putStrLn ("")
-                putStrLn ("Digite sua resposta")
-                let resposta = do
-                    resp <- getLine
-                    if (resp == "e") then exitWith $ ExitFailure 3
-                    else
-                        -- compara as respostas
-                        -- diz se acertou ou errou
-                        putStrLn ("");
-                resposta
-                threadDelay 1050000
-                primeiroGrau
-            primeiroGrau
-
-        else if (operacao == "s") then do
-            let segundoGrau = do
-                putStrLn ("Equação:")
-                -- Falta manipular a leitura com o split
-                let arq = Read.lerSegundoGrau
-                putStrLn (arq !! Read.randomValue (length arq))
-                putStrLn ("")
-                putStrLn ("Digite sua resposta")
-                let resposta = do
-                    resp <- getLine
-                    if (resp == "e") then exitWith $ ExitFailure 3
-                    else
-                        -- compara as respostas
-                        -- diz se acertou ou errou
-                        putStrLn ("");
-                resposta
-                threadDelay 1050000
-                segundoGrau
-            segundoGrau            
-        else if (operacao == "e") then exitWith $ ExitFailure 3
-        else do  
+        
+        mode operacao        
+        if (operacao == "e") then exitWith $ ExitFailure 3
+        else if (operacao /= "s" && operacao /= "p") then do
             putStrLn ("Opção inválida. Por favor tente novamente.") 
             loop
+            else
+                respondendo operacao 40
     loop
 
-    -- Leitura e exibição linha por linha
 
 computadorResponde :: IO()
 computadorResponde = do
@@ -174,9 +179,6 @@ computadorResponde = do
                 loopGetEquacao
             
     loopGetEquacao
-
-
-
     
 
 start :: IO()
