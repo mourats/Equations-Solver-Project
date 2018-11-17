@@ -22,7 +22,7 @@ modoComputador :-
     writeln("Modo do computador escolhido!"), halt(0).
 
 modoUsuario :-
-    writeln("Modo do usuário escolhido!"), 
+    nl, writeln("Modo do usuário escolhido!"), 
     show_equatios_types,
     leitura(Option) -> 
     (Option == 1, leituraPrimeiroGrau; 

@@ -30,8 +30,8 @@ leitura(X) :-
     string_to_atom(X3,X2),
     atom_number(X2,X).
 
-lengthList(0,[]).
-lengthList(L+1, [H|T]) :- lengthList(L,T).
+lengthList([], 0).
+lengthList([_|Xs] , L ) :- lengthList(Xs,N), L is N+1.
 
 
 leituraPrimeiroGrau:- 
@@ -47,7 +47,7 @@ leituraPrimeiroGrau:-
     open('data/second-degree-equations-bd.txt', read, Str),
     read_file(Str,String),
     close(Str),
-    lengthList(lengthList, String),
-    random(0,lengthList,Index),
+    lengthList(String, LengthList),
+    random(0,LengthList,Index),
     nth0(Index, String, Elem),
     writeln(Elem),halt(0).
