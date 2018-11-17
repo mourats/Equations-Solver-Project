@@ -8,8 +8,20 @@ main :-
 
 menu :-
     show_menu,
-    show_opcoes,
-    read_opcao(Opcao).
+    opcaoModo.
 
-read_opcao(Opcao) :-
-    read(Option).
+opcaoModo :- 
+    show_opcoes,
+    leitura(Opcao) -> 
+    (Opcao == 1, modoComputador; 
+    Opcao == 2, modoUsuario; 
+    Opcao == 3, sair; 
+    writeln("Opção Inválida!"),nl, opcaoModo).
+
+modoComputador :- 
+    writeln("Modo do computador escolhido!"), halt(0).
+
+modoUsuario :-
+    writeln("Modo do usuário escolhido!"), halt(0).
+
+sair :- halt(0).
