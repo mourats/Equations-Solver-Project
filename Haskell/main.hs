@@ -45,7 +45,7 @@ mode opc = do
     else do 
         putStrLn ("========================= Modo equações do Segundo Grau escolhido! ========================")
         putStrLn ("")
-        putStrLn ("=====Atenção:=====")
+        putStrLn ("=====Atenção=====")
         putStrLn ("As respostas são sempre um número (2, 5, -9, 2/3) ou V") 
         putStrLn ("V - Representa que o conjunto solução é vazio para o domínio dos Reais.")
 
@@ -55,7 +55,7 @@ solucaoLinear a b = do
     if (a == 0) then putStrLn("A equação é linear porém a operação - b/a, gera uma divisão por zero, não possuindo solução.")
     else do
         let  x = fromIntegral((-1) * b) / fromIntegral(a)
-        putStrLn("A equação é linear e a sua soluçãao é x = " ++ (show $ x))
+        putStrLn("A equação é linear e a sua solução é x = " ++ (show $ x))
 
 calculaRaizes :: Int -> Int -> Int -> IO()
 calculaRaizes a b c = do
@@ -68,7 +68,7 @@ calculaRaizes a b c = do
         else if (delta == 0) then do
 
             let res = fromIntegral((-1) * b) / fromIntegral(2 * a)
-            putStrLn ("O delta é igual a zero, assim a equação possui duas soluções iguais a" ++ (show $ res) ++".)")
+            putStrLn ("O delta é igual a zero, assim a equação possui duas soluções iguais a " ++ (show $ res))
         else do
             let raiz = floor . sqrt $ fromIntegral delta
             let x1 = fromIntegral(((-1) * b) + raiz) / fromIntegral(2 * a)
@@ -108,7 +108,6 @@ respondendo arq tam = do
                 putStrLn (result);
     resposta
     respondendo arq tam
-
 
 usuarioResponde :: IO()
 usuarioResponde = do
@@ -201,7 +200,6 @@ start = do
             loop
     loop
 
-    
 main :: IO()
 main = do
     print (Util.randomValue 30)
