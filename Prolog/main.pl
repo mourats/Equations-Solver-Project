@@ -22,6 +22,12 @@ modoComputador :-
     writeln("Modo do computador escolhido!"), halt(0).
 
 modoUsuario :-
-    writeln("Modo do usuário escolhido!"), halt(0).
+    writeln("Modo do usuário escolhido!"), 
+    show_equatios_types,
+    leitura(Option) -> 
+    (Option == 1, leituraPrimeiroGrau; 
+    Option == 2, leituraPrimeiroGrau; 
+    Option == 3, menu; 
+    writeln("Opção inválida. Por favor tente novamente."),nl, modoUsuario).
 
 sair :- halt(0).
