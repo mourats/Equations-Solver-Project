@@ -20,7 +20,9 @@ opcaoModo :-
     writeln("Opção Inválida!"),nl, opcaoModo).
 
 modoComputador :- 
-    halt(0).
+    writeln("Deseja consultar as instruções? Se sim digite S, se não, digite outra tecla."),
+    leitura(Opcao),
+    (Opcao == 'S' -> instrucoes, loopGetEquacao); loopGetEquacao.
 
 modoUsuario :- 
     show_equatios_types,
@@ -44,3 +46,6 @@ respondendo(Arquivo) :-
     (Resultado == 'E', halt(0);
     Resultado == Resposta, writeln("ACERTOU!"), respondendo(Arquivo);
     writeln("Errou! :( "), write("Resposta: "), writeln(Resposta), respondendo(Arquivo)).
+
+loopGetEquacao :-
+    sair.
