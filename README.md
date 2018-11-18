@@ -8,9 +8,13 @@ Repositório destinado ao projeto de PLP
 PLP 2018.2
 
 Grupo:
+
 Marcelo Vitorino
+
 Thiago Moura
+
 Gabriel Almeida
+
 José de Arimatéia
 
 Descrição do Projeto:
