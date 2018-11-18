@@ -30,12 +30,18 @@ modoUsuario :-
     Option == 3, menu; 
     writeln("Opção inválida. Por favor tente novamente."),nl, modoUsuario).
 
-respondendo(Arquivo) :- 
-    questaoRandom(Arquivo, Questao),
+respondendo(Arquivo) :-
+    nl, questaoRandom(Arquivo, Questao),
     quebrandoQuestao(Questao, Result),
     nth1(1, Result, Pergunta),
-    nth1(2, Result, Resposta),
+    nth1(2, Result, X),
+    string_to_atom(X,Resposta),
     nth1(3, Result, Dica),
     writeln(Pergunta),
     writeln(Dica),
-    halt(0).
+    writeln("Digite E para sair."),
+    read_line_to_codes(user_input, X2),
+    string_to_atom(X2,Resultado) ->
+    (Resultado == 'E', halt(0);
+    Resultado == Resposta, writeln("ACERTOU!"), respondendo(Arquivo);
+    writeln("Errou! :( "), write("Resposta: "), writeln(Resposta), respondendo(Arquivo)).
