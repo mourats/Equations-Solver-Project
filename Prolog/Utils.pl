@@ -1,10 +1,7 @@
-:- include('Read.pl').
-
 show_logo :-
     open('data/logomarca.txt', read, Str),
     read_file(Str,String),
-    close(Str),
-    nl,nl,
+    close(Str), nl,
     imprime(String), nl,nl.
 
 show_menu :-
@@ -30,24 +27,16 @@ leitura(X) :-
     string_to_atom(X3,X2),
     atom_number(X2,X).
 
-lengthList([], 0).
-lengthList([_|Xs] , L ) :- lengthList(Xs,N), L is N+1.
+quebrandoQuestao(Questao, Result) :- 
+    split_string(Questao, "&", "", Result).
 
-
-leituraPrimeiroGrau:- 
-    open('data/first-degree-equations-bd.txt', read, Str),
-    read_file(Str,String),
-    close(Str),
-    lengthList(lengthList, String),
-    random(0,lengthList,Index),
-    nth0(Index, String, Elem),
-    writeln(Elem),halt(0).
-
-leituraPrimeiroGrau:- 
-    open('data/second-degree-equations-bd.txt', read, Str),
-    read_file(Str,String),
-    close(Str),
+questaoRandom(String, Result) :-
     lengthList(String, LengthList),
     random(0,LengthList,Index),
-    nth0(Index, String, Elem),
-    writeln(Elem),halt(0).
+    nth1(Index, String, Elem),
+    atomic_list_concat(Elem, " ", Result).
+
+imprime([]).
+imprime([H|T]):- write(H),nl, imprime(T).
+
+sair :- halt(0).
