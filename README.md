@@ -12,7 +12,6 @@ Marcelo Vitorino
 Thiago Moura
 Gabriel Almeida
 José de Arimatéia
-Aislan Jefferson
 
 Descrição do Projeto:
 

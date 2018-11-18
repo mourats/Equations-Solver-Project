@@ -13,7 +13,7 @@ menu :-
 
 opcaoModo :- 
     show_opcoes,
-    leitura(Opcao) -> 
+    leituraNumber(Opcao) -> 
     (Opcao == 1, nl,writeln("Modo do computador escolhido!"), nl, modoComputador; 
     Opcao == 2, nl,writeln("Modo do usuário escolhido!"), nl, modoUsuario; 
     Opcao == 3, sair; 
@@ -24,7 +24,7 @@ modoComputador :-
 
 modoUsuario :- 
     show_equatios_types,
-    leitura(Option) -> 
+    leituraNumber(Option) -> 
     (Option == 1, leituraPrimeiroGrau(Result), respondendo(Result); 
     Option == 2, leituraSegundoGrau(Result), respondendo(Result); 
     Option == 3, menu; 
@@ -40,8 +40,7 @@ respondendo(Arquivo) :-
     writeln(Pergunta),
     writeln(Dica),
     writeln("Digite E para sair."),
-    read_line_to_codes(user_input, X2),
-    string_to_atom(X2,Resultado) ->
+    leitura(Resultado) ->
     (Resultado == 'E', halt(0);
     Resultado == Resposta, writeln("ACERTOU!"), respondendo(Arquivo);
     writeln("Errou! :( "), write("Resposta: "), writeln(Resposta), respondendo(Arquivo)).

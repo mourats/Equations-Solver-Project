@@ -1,8 +1,11 @@
 show_logo :-
     open('data/logomarca.txt', read, Str),
     read_file(Str,String),
-    close(Str), nl,
+    close(Str),
     imprime(String), nl,nl.
+
+imprime([]).
+imprime([H|T]):- atomic_list_concat(H, " ", Result), write(Result), nl, imprime(T).
 
 show_menu :-
     write("==========================================================================================="), nl,
@@ -22,10 +25,14 @@ show_equatios_types :-
     write("[2] - Segundo Grau"),nl,
     write("[3] - Caso deseje voltar ao menu."),nl.
 
-leitura(X) :- 
+leituraNumber(X) :- 
     read_line_to_codes(user_input, X3),
     string_to_atom(X3,X2),
     atom_number(X2,X).
+
+leitura(X) :- 
+    read_line_to_codes(user_input, X2),
+    string_to_atom(X2,X).
 
 quebrandoQuestao(Questao, Result) :- 
     split_string(Questao, "&", "", Result).
@@ -36,7 +43,7 @@ questaoRandom(String, Result) :-
     nth1(Index, String, Elem),
     atomic_list_concat(Elem, " ", Result).
 
-imprime([]).
-imprime([H|T]):- write(H),nl, imprime(T).
+lengthList([], 0).
+lengthList([_|Xs] , L ) :- lengthList(Xs,N), L is N+1.
 
 sair :- halt(0).
