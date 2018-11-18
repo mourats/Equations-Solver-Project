@@ -22,7 +22,7 @@ opcaoModo :-
 modoComputador :- 
     writeln("Deseja consultar as instruções? Se sim digite S, se não, digite outra tecla."),
     leitura(Opcao),
-    (Opcao == 'S' -> instrucoes, loopGetEquacao); loopGetEquacao.
+    (Opcao == 'S'; Opcao == 's' -> instrucoes, loopGetEquacao); loopGetEquacao.
 
 modoUsuario :- 
     show_equatios_types,
@@ -43,7 +43,7 @@ respondendo(Arquivo) :-
     writeln(Dica),
     writeln("Digite E para sair."),
     leitura(Resultado) ->
-    (Resultado == 'E', halt(0);
+    (Resultado == 'E'; Resultado == 'e', halt(0);
     Resultado == Resposta, writeln("ACERTOU!"), respondendo(Arquivo);
     writeln("Errou! :( "), write("Resposta: "), writeln(Resposta), respondendo(Arquivo)).
 
