@@ -20,7 +20,10 @@ opcaoModo :-
     writeln("Opção Inválida!"),nl, opcaoModo).
 
 modoComputador :- 
+    writeln(""),
+    writeln("Modo do computador escolhido!"),
     writeln("Deseja consultar as instruções? Se sim digite S, se não, digite outra tecla."),
+    writeln(""),
     leitura(Opcao),
     (Opcao == 'S'; Opcao == 's' -> instrucoes, loopGetEquacao); loopGetEquacao.
 
@@ -48,4 +51,9 @@ respondendo(Arquivo) :-
     writeln("Errou! :( "), write("Resposta: "), writeln(Resposta), respondendo(Arquivo)).
 
 loopGetEquacao :-
-    sair.
+    writeln("Caso deseje sair, digite 'E'."),
+    writeln(""),
+    writeln("Digite uma equação linear ou quadrática:"),
+    leitura(Equacao) ->
+    (Equacao == 'E'; Equacao == 'e', halt(0);
+    Equacao == "", loopGetEquacao).
