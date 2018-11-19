@@ -2,6 +2,8 @@
 :- use_module(library(pio)).
 :- include('Utils.pl').
 :- include('Read.pl').
+:- include('Validador.PL').
+
 
 main :-
     show_logo,
@@ -20,8 +22,6 @@ opcaoModo :-
     writeln("Opção Inválida!"),nl, opcaoModo).
 
 modoComputador :- 
-    writeln(""),
-    writeln("Modo do computador escolhido!"),
     writeln("Deseja consultar as instruções? Se sim digite S, se não, digite outra tecla."),
     writeln(""),
     leitura(Opcao),
@@ -58,7 +58,7 @@ loopGetEquacao :-
     ((Equacao == 'S'; Equacao == 's'), sair);
     (Equacao == '', writeln("Entrada inválida."), loopGetEquacao);
     ehValidaEquacao(Equacao, Resposta), %! SETAR O 1 de Resposta == 1 PARA O VALOR ESPERADO POR QUEM IMPLEMENTOU 
-    Resposta == 1 -> simplificar(Eq, Simplificada), resolverEquacao(Simplificada), loopGetEquacao;
+    Resposta == 1 -> resolverEquacao(Equacao), loopGetEquacao;
     (writeln("Equação inválida! Por favor tente novamente."), loopGetEquacao)).
 
 ehValidaEquacao(Eq, Resp) :- %! COLOCAR ESSA FUNÇÃO
@@ -67,8 +67,12 @@ ehValidaEquacao(Eq, Resp) :- %! COLOCAR ESSA FUNÇÃO
 simplificar(Eq, Simpl) :- %! COLOCAR ESSA FUNÇÃO
     Simpl is 12.
 
-resolverEquacao(Eq) :-%! COLOCAR ESSA FUNÇÃO
-    writeln("Equacao Resolvida!"), nl, calculaRaizes(2, 9, 10). 
+resolverEquacao(Eq) :-
+    split_string(Eq, " ", "", Splitted), TermosSomados = somarTermosComum(Splitted), 
+    nth0(2, TermosSomados, a),
+    nth0(1, TermosSomados, b),
+    nth0(0, TermosSomados, c),
+    calculaRaizes(a, b, c). 
 
 calculaRaizes(A, B, C) :-
     (A == 0 -> solucaoLinear(B, C));
