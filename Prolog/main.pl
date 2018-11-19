@@ -57,18 +57,34 @@ loopGetEquacao :-
     (((Equacao == 'M'; Equacao == 'm'), menu);
     ((Equacao == 'S'; Equacao == 's'), sair);
     (Equacao == '', writeln("Entrada inválida."), loopGetEquacao);
-    ehValidaEquacao(Equacao, Resposta), 
-    Resposta == 1 -> writeln("VAMOS SIMPLIFICAR!"), simplificar(Eq, Simplificada), resolverEquacao(Simplificada), loopGetEquacao;
+    ehValidaEquacao(Equacao, Resposta), %! SETAR O 1 de Resposta == 1 PARA O VALOR ESPERADO POR QUEM IMPLEMENTOU 
+    Resposta == 1 -> simplificar(Eq, Simplificada), resolverEquacao(Simplificada), loopGetEquacao;
     (writeln("Equação inválida! Por favor tente novamente."), loopGetEquacao)).
 
-ehValidaEquacao(Eq, Resp) :-
-    Resp is 1.
+ehValidaEquacao(Eq, Resp) :- %! COLOCAR ESSA FUNÇÃO
+    Resp is 1. 
 
-simplificar(Eq, Simpl) :-
+simplificar(Eq, Simpl) :- %! COLOCAR ESSA FUNÇÃO
     Simpl is 12.
 
-resolverEquacao(Eq) :-
-    writeln("Equacao Resolvida!"), nl, calculaRaizes(12, 13, 14).
+resolverEquacao(Eq) :-%! COLOCAR ESSA FUNÇÃO
+    writeln("Equacao Resolvida!"), nl, calculaRaizes(2, 9, 10). 
 
 calculaRaizes(A, B, C) :-
-    writeln("Calculei!").
+    (A == 0 -> solucaoLinear(B, C));
+    solucaoQuadratica(A, B, C).
+
+solucaoLinear(A, B) :-
+    A == 0 -> (writeln("A equação é linear porém a operação - b/a, gera uma divisão por zero, não possuindo solução."), nl);
+    X is ((-1) * B) / A, write("A equação é linear e a sua solução é x = "), write(X), write("."), nl.
+
+solucaoQuadratica(A, B, C) :-
+    Delta is (B * B) - (4 * A * C),
+    (((Delta < 0) -> write("O delta é negativo, "), write(Delta), write(" , assim a equação não possui solução no conjunto dos números reais."));
+    ((Delta == 0) -> X is ((-1) * B) / 2 * A, write("O delta é igual a zero, assim a equação possui duas soluções iguais a "), write(X), write("."));
+    (
+    Raiz is Delta ** (1/2),
+    X1 is ((((-1) * B) + Raiz) / (2 * A)),
+    X2 is ((((-1) * B) - Raiz) / (2 * A)),
+    write("Como o delta é positivo, "), write(Delta), write(", a equação possui duas soluções distintas. São elas: "), writeln(""), write("x1 = "), write(X1), write(" e X2 = "), write(X2)), write("."), nl).
+ 
