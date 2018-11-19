@@ -22,7 +22,7 @@ opcaoModo :-
     writeln("Opção Inválida!"),nl, opcaoModo).
 
 modoComputador :- 
-    writeln("Deseja consultar as instruções? Se sim digite S, se não, digite outra tecla."),
+    writeln("Deseja consultar as instruções? Se sim digite S, se não, tecle ENTER."),
     writeln(""),
     leitura(Opcao),
     (Opcao == 'S'; Opcao == 's' -> instrucoes, loopGetEquacao); loopGetEquacao.
@@ -57,15 +57,8 @@ loopGetEquacao :-
     (((Equacao == 'M'; Equacao == 'm'), menu);
     ((Equacao == 'S'; Equacao == 's'), sair);
     (Equacao == '', writeln("Entrada inválida."), loopGetEquacao);
-    ehValidaEquacao(Equacao, Resposta), %! SETAR O 1 de Resposta == 1 PARA O VALOR ESPERADO POR QUEM IMPLEMENTOU 
-    Resposta == 1 -> resolverEquacao(Equacao), loopGetEquacao;
-    (writeln("Equação inválida! Por favor tente novamente."), loopGetEquacao)).
-
-ehValidaEquacao(Eq, Resp) :- %! COLOCAR ESSA FUNÇÃO
-    Resp is 1. 
-
-simplificar(Eq, Simpl) :- %! COLOCAR ESSA FUNÇÃO
-    Simpl is 12.
+    test(Equacao) -> resolverEquacao(Equacao), loopGetEquacao;
+    (writeln("Equação inválida! Por favor tente novamente."), loopGetEquacao)). 
 
 resolverEquacao(Eq) :-
     split_string(Eq, " ", "", Splitted), somarTermosComum(Splitted, TermosSomados), 
