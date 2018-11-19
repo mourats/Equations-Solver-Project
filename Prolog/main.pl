@@ -20,7 +20,10 @@ opcaoModo :-
     writeln("Opção Inválida!"),nl, opcaoModo).
 
 modoComputador :- 
+    writeln(""),
+    writeln("Modo do computador escolhido!"),
     writeln("Deseja consultar as instruções? Se sim digite S, se não, digite outra tecla."),
+    writeln(""),
     leitura(Opcao),
     (Opcao == 'S'; Opcao == 's' -> instrucoes, loopGetEquacao); loopGetEquacao.
 
