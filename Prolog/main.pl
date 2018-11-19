@@ -46,14 +46,20 @@ respondendo(Arquivo) :-
     writeln(Dica),
     writeln("Digite E para sair."),
     leitura(Resultado) ->
-    (Resultado == 'E'; Resultado == 'e', halt(0);
+    (Resultado == 'E'; Resultado == 'e', sair;
     Resultado == Resposta, writeln("ACERTOU!"), respondendo(Arquivo);
     writeln("Errou! :( "), write("Resposta: "), writeln(Resposta), respondendo(Arquivo)).
 
 loopGetEquacao :-
-    writeln("Caso deseje sair, digite 'E'."),
-    writeln(""),
-    writeln("Digite uma equação linear ou quadrática:"),
-    leitura(Equacao) ->
-    (Equacao == 'E'; Equacao == 'e', halt(0);
-    Equacao == "", loopGetEquacao).
+    nl, write("Caso queira retornar ao menu tecle M. Para Sair tecle S."), nl, 
+    write("Digite uma equação linear ou quadrática:"), nl,
+    leitura(Equacao) -> 
+    (((Equacao == 'M'; Equacao == 'm'), menu);
+    ((Equacao == 'S'; Equacao == 's'), sair);
+    (Equacao == '', writeln("Entrada inválida."), loopGetEquacao);
+    ehValidaEquacao(Equacao, Resposta), 
+    Resposta == 1 -> writeln("VAMOS SIMPLIFICAR!"), sair;
+    (writeln("Equação inválida! Por favor tente novamente."), loopGetEquacao)).
+
+ehValidaEquacao(Eq, Resp) :-
+Resp is 0.
