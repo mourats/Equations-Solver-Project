@@ -80,12 +80,12 @@ calculaRaizes(A, B, C) :-
 
 solucaoLinear(A, B) :-
     A == 0 -> (writeln("A equação é linear porém a operação - b/a, gera uma divisão por zero, não possuindo solução."), nl);
-    X is ((-1) * B) / A, write("A equação é linear e a sua solução é x = "), write(X), write("."), nl.
+    X is (((-1) * B) / A), write("A equação é linear e a sua solução é x = "), write(X), write("."), nl.
 
 solucaoQuadratica(A, B, C) :-
-    Delta is (B * B) - (4 * A * C),
+    Delta is ((B * B) - (4 * A * C)),
     (((Delta < 0) -> write("O delta é negativo, "), write(Delta), write(" , assim a equação não possui solução no conjunto dos números reais."));
-    ((Delta == 0) -> X is ((-1) * B) / 2 * A, write("O delta é igual a zero, assim a equação possui duas soluções iguais a "), write(X), write("."));
+    ((Delta == 0) -> X is (((-1) * B) / (2 * A)), write("O delta é igual a zero, assim a equação possui duas soluções iguais a "), write(X), write("."));
     (
     Raiz is Delta ** (1/2),
     X1 is ((((-1) * B) + Raiz) / (2 * A)),
