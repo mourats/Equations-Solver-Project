@@ -68,7 +68,7 @@ simplificar(Eq, Simpl) :- %! COLOCAR ESSA FUNÇÃO
     Simpl is 12.
 
 resolverEquacao(Eq) :-
-    split_string(Eq, " ", "", Splitted), TermosSomados = somarTermosComum(Splitted), 
+    split_string(Eq, " ", "", Splitted), somarTermosComum(Splitted, TermosSomados), 
     nth0(2, TermosSomados, a),
     nth0(1, TermosSomados, b),
     nth0(0, TermosSomados, c),
