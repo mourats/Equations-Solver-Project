@@ -54,11 +54,9 @@ loopGetEquacao :-
     (((Equacao == 'M'; Equacao == 'm'), menu);
     ((Equacao == 'S'; Equacao == 's'), sair);
     (Equacao == '', writeln("Entrada inválida."), loopGetEquacao);
-    sair).
-    /*
-    REMOVE O sair 
-    ,
     ehValidaEquacao(Equacao, Resposta), 
-    ((Resposta != ALGO_DEFINIDO) -> writeln("Equação inválida! Por favor tente novamente."), loopGetEquacao);
-    ((Resposta == ALGO_DEFINIDO) -> write("VAMOS SIMPLIFICAR!")).
-    */
+    Resposta == 1 -> writeln("VAMOS SIMPLIFICAR!"), sair;
+    (writeln("Equação inválida! Por favor tente novamente."), loopGetEquacao)).
+
+ehValidaEquacao(Eq, Resp) :-
+Resp is 0.
