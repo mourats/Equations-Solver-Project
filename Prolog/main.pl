@@ -55,8 +55,17 @@ loopGetEquacao :-
     ((Equacao == 'S'; Equacao == 's'), sair);
     (Equacao == '', writeln("Entrada inválida."), loopGetEquacao);
     ehValidaEquacao(Equacao, Resposta), 
-    Resposta == 1 -> writeln("VAMOS SIMPLIFICAR!"), sair;
+    Resposta == 1 -> writeln("VAMOS SIMPLIFICAR!"), simplificar(Eq, Simplificada), resolverEquacao(Simplificada), loopGetEquacao;
     (writeln("Equação inválida! Por favor tente novamente."), loopGetEquacao)).
 
 ehValidaEquacao(Eq, Resp) :-
-Resp is 0.
+    Resp is 1.
+
+simplificar(Eq, Simpl) :-
+    Simpl is 12.
+
+resolverEquacao(Eq) :-
+    writeln("Equacao Resolvida!"), nl, calculaRaizes(12, 13, 14).
+
+calculaRaizes(A, B, C) :-
+    writeln("Calculei!").
