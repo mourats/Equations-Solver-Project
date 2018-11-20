@@ -61,3 +61,11 @@ instrucoes :-
 	writeln("a) 2y^2 - 8 = 0 - Não é aceito outra variável que não seja x."),
 	writeln("d) x^2 + 5x/2 - 3/2 = 0 - É necessário ter espaços entre o termo e o /."),
 	writeln("e) 3x^2 - 24x + 5 = -6x^2 - 11 -É necessário ter espaço entre o - e o 6."),nl.
+
+backMenuSair :- 
+    nl, writeln("***Caso queira retornar ao menu tecle M. Para Sair tecle S.***").
+
+instrucoesRespostas :-
+    writeln("=====Atenção:====="),
+    writeln("As respostas são sempre um número. Exemplos: (2, 5, -9, 2/3 e V)."),
+    writeln("V - Representa que o conjunto solução é vazio para o domínio dos Reais."), nl.

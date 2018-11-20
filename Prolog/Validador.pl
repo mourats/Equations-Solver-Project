@@ -193,14 +193,3 @@ replace([H|T], I, X, [H|R]) :-
     replace(T, I1, X, R).
 
 listsplit([H|T], H, T).
-
-
-
-
-
-    
-
-
-
-
-

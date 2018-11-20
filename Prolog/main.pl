@@ -2,8 +2,7 @@
 :- use_module(library(pio)).
 :- include('Utils.pl').
 :- include('Read.pl').
-:- include('Validador.PL').
-
+:- include('Validador.pl').
 
 main :-
     show_logo,
@@ -22,12 +21,13 @@ opcaoModo :-
     writeln("Opção Inválida!"),nl, opcaoModo).
 
 modoComputador :- 
-    writeln("Deseja consultar as instruções? Se sim digite S, se não, tecle ENTER."),
-    writeln(""),
+    writeln("Deseja consultar as instruções? Se sim digite S, se não, tecle ENTER."),nl,
     leitura(Opcao),
-    (Opcao == 'S'; Opcao == 's' -> instrucoes, loopGetEquacao); loopGetEquacao.
+    (Opcao == 'S'; Opcao == 's' -> instrucoes, backMenuSair, loopGetEquacao); 
+    backMenuSair, loopGetEquacao.
 
 modoUsuario :- 
+    instrucoesRespostas,
     show_equatios_types,
     leituraNumber(Option) -> 
     (Option == 1, leituraPrimeiroGrau(Result), respondendo(Result); 
@@ -51,8 +51,7 @@ respondendo(Arquivo) :-
     writeln("Errou! :( "), write("Resposta: "), writeln(Resposta), respondendo(Arquivo)).
 
 loopGetEquacao :-
-    nl, write("Caso queira retornar ao menu tecle M. Para Sair tecle S."), nl, 
-    write("Digite uma equação linear ou quadrática:"), nl,
+    nl,write("Digite uma equação linear ou quadrática:"), nl,
     leitura(Equacao) -> 
     (((Equacao == 'M'; Equacao == 'm'), menu);
     ((Equacao == 'S'; Equacao == 's'), sair);
@@ -83,5 +82,4 @@ solucaoQuadratica(A, B, C) :-
     Raiz is Delta ** (1/2),
     X1 is ((((-1) * B) + Raiz) / (2 * A)),
     X2 is ((((-1) * B) - Raiz) / (2 * A)),
-    write("Como o delta é positivo, "), write(Delta), write(", a equação possui duas soluções distintas. São elas: "), writeln(""), write("x1 = "), write(X1), write(" e X2 = "), write(X2)), write("."), nl).
- 
+    write("Como o delta é positivo, "), write(Delta), write(", a equação possui duas soluções distintas. São elas: "), writeln(""), write("x1 = "), write(X1), write(" e x2 = "), write(X2)), write("."), nl).
