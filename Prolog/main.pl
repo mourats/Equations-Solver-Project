@@ -23,7 +23,7 @@ opcaoModo :-
 modoComputador :- 
     writeln("Deseja consultar as instruções? Se sim digite S, se não, tecle ENTER."),nl,
     leitura(Opcao),
-    (Opcao == 'S'; Opcao == 's' -> instrucoes, backMenuSair, loopGetEquacao); 
+    ((Opcao == 'S'; Opcao == 's') -> instrucoes, backMenuSair, loopGetEquacao); 
     backMenuSair, loopGetEquacao.
 
 modoUsuario :- 
@@ -46,7 +46,7 @@ respondendo(Arquivo) :-
     writeln(Dica),
     writeln("Digite E para sair."),
     leitura(Resultado) ->
-    (Resultado == 'E'; Resultado == 'e', sair;
+    ((Resultado == 'E'; Resultado == 'e'), sair;
     Resultado == Resposta, writeln("ACERTOU!"), respondendo(Arquivo);
     writeln("Errou! :( "), write("Resposta: "), writeln(Resposta), respondendo(Arquivo)).
 
