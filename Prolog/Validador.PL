@@ -133,7 +133,7 @@ somarTermosComumAux(String,I,_,ResultAux,Result):-
 
 somarTermosComumAux(String,I,Igual,ResultAux,Result):-
     nth0(I,String, Element),
-    Element == "+" ; Element == "-",
+    (Element == "+" ; Element == "-"),
     PI is I+1,
     somarTermosComumAux(String,PI,Igual,ResultAux,Result).
 
