@@ -34,7 +34,6 @@ instrucoes = do
 	putStrLn ("e) 3x^2 - 24x + 5 = -6x^2 - 11 -É necessário ter espaço entre o - e o 6.");
     putStrLn ("");
 
-
 mode :: String -> IO()
 mode opc = do
     if (opc == "p") then do 

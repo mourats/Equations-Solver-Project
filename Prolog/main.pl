@@ -61,11 +61,11 @@ loopGetEquacao :-
     (writeln("Equação inválida! Por favor tente novamente."), loopGetEquacao)). 
 
 resolverEquacao(Eq) :-
-    split_string(Eq, " ", "", Splitted), somarTermosComum(Splitted, TermosSomados), 
-    nth0(2, TermosSomados, a),
-    nth0(1, TermosSomados, b),
-    nth0(0, TermosSomados, c),
-    calculaRaizes(a, b, c). 
+    split_string(Eq, " ", "", Splitted), somarTermosComum(Splitted, TermosSomados),
+    nth0(2, TermosSomados, A),
+    nth0(1, TermosSomados, B),
+    nth0(0, TermosSomados, C),
+    calculaRaizes(A,B,C). 
 
 calculaRaizes(A, B, C) :-
     (A == 0 -> solucaoLinear(B, C));
